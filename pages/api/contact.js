@@ -16,12 +16,14 @@ export default async function handler(req, res) {
     },
   });
 
+  const fullMessage = `${message}\n\nReply to: ${email}`;
+
   try {
     await transporter.sendMail({
       from: email,
       to: process.env.EMAIL_USER, //de momento es el mismo
       subject: `New web message from ${name}`,
-      text: message,
+      text: fullMessage,
     });
 
     res.status(200).json({ success: true });
