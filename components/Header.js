@@ -21,13 +21,13 @@ export default function Header() {
 
       {/* Redes sociales */}
       <div className="flex space-x-4">
-        <a href="https://instagram.com" target="_blank" rel="noopener noreferrer">
+        <a href="https://www.instagram.com/javierllarenafilms/" target="_blank" rel="noopener noreferrer">
           <FaInstagram className="text-xl hover:scale-110 transition" />
         </a>
-        <a href="https://youtube.com" target="_blank" rel="noopener noreferrer">
+        <a href="https://www.youtube.com/@javirius5294" target="_blank" rel="noopener noreferrer">
           <FaYoutube className="text-xl hover:scale-110 transition" />
         </a>
-        <a href="https://linkedin.com" target="_blank" rel="noopener noreferrer">
+        <a href="https://www.linkedin.com/in/javier-llarena-s%C3%A1nchez-33b7371b9/" target="_blank" rel="noopener noreferrer">
           <FaLinkedin className="text-xl hover:scale-110 transition" />
         </a>
       </div>

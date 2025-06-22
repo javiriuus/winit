@@ -9,7 +9,7 @@ export default function Hero() {
         onClick={() => {
           document.getElementById("portfolio")?.scrollIntoView({ behavior: "smooth" });
         }}
-        className="mt-6 px-6 py-2 bg-black text-white rounded-full"
+        className="mt-6 px-6 py-2 bg-white text-black rounded-full"
       >
         View my work
       </button>

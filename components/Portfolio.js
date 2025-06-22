@@ -1,6 +1,7 @@
 export default function Portfolio() {
   const videoIds = [
     "xUCmm-Ok4Bc",
+    "5-3FkJr44uo",
     "Waf-QiBDYzk",
     "yJXVszisGY8",
     "ARZivn1zl1w",
@@ -8,10 +9,12 @@ export default function Portfolio() {
     "J74Wtc5tvGA",
     "6oN7p1lFUac",
     "lCZf0F5PbqY",
+    
   ];
 
   const titles = [
     "La belleza del caos",
+    "3:08",
     "Valdo - Me gustas más que dormir",
     "Aún Recuerdo",
     "TÓXICO",
@@ -19,6 +22,7 @@ export default function Portfolio() {
     "PRENDE EL BLON",
     "Y si...?",
     "Miénteme Como Sabes",
+    
   ];
 
   return (

@@ -23,7 +23,7 @@ export default function Contact() {
               >
                 &times;
               </button>
-              <h2 className="text-2xl font-bold mb-4 text-center">Send me an email</h2>
+              <h2 className="text-2xl font-bold mb-4 text-black text-center">Contact me!</h2>
               <form className="space-y-4">
                 <input
                   type="text"
