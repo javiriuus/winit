@@ -17,12 +17,13 @@ export default function Portfolio() {
     "TÓXICO",
     "Te he vuelto a ver",
     "PRENDE EL BLON",
+    "Y si...?",
     "Miénteme Como Sabes",
   ];
 
   return (
     <section id="portfolio" className="py-12 px-6 md:px-16 lg:px-24">
-      <h2 className="text-3xl font-bold mb-6 text-white">Selected Work</h2>
+      <h2 className="text-3xl font-bold text-center mb-12">Selected Work</h2>
       <div className="grid gap-10 md:grid-cols-1 lg:grid-cols-2">
         {videoIds.map((id, index) => (
           <div key={index} className="rounded-lg bg-black/60 backdrop-blur-md p-4 shadow-xl">

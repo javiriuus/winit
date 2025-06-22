@@ -28,22 +28,29 @@ export default function BackgroundSlideshow() {
   }, []);
 
   return (
-    <div className="absolute top-0 left-0 w-full h-full z-0 overflow-hidden">
-      {/* Fondo de imágenes */}
+    <div className="absolute top-0 left-0 w-full h-[700px] z-0 overflow-hidden">
       {images.map((src, index) => (
-        <Image
+        <div
           key={index}
-          src={src}
-          alt={`Slide ${index}`}
-          fill
-          className={`object-cover absolute transition-opacity duration-[3000ms] ease-in-out ${
-            index === currentImageIndex ? "opacity-100" : "opacity-0"
+          className={`absolute top-0 left-0 w-full h-full transition-opacity duration-[3000ms] ease-in-out ${
+            index === currentImageIndex ? "opacity-100 z-10" : "opacity-0 z-0"
           }`}
-        />
+        >
+          <Image
+            src={src}
+            alt={`Slide ${index}`}
+            layout="fill"
+            objectFit="cover"
+            objectPosition="top"
+            className="w-full h-full"
+          />
+          {/* Solo un degradado abajo */}
+          <div className="absolute bottom-0 left-0 w-full h-1/5 bg-gradient-to-b from-transparent to-black" />
+          {/* bajamos la exposicion */}
+          <div className="absolute top-0 left-0 w-full h-full bg-black opacity-80 z-10" />
+        </div>
+        
       ))}
-
-      {/* Capa negra encima */}
-      <div className="absolute top-0 left-0 w-full h-full bg-black opacity-80 z-10" />
     </div>
   );
 }

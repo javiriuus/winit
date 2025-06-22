@@ -1,8 +1,8 @@
 export default function Hero() {
   return (
-    <section className="text-center py-20">
-      <h1 className="text-4xl font-bold">Elevating Stories Through the Lens</h1>
-      <p className="mt-4 max-w-xl mx-auto">
+    <section id="hero" className="min-h-screen flex flex-col justify-center items-center text-white text-center px-4 py-32">
+      <h1 className="text-5xl md:text-5xl font-bold mb-6">Elevating Stories Through the Lens</h1>
+      <p className="mt-4 md:text-xl max-w-xl mx-auto">
         I'm Javier Llarena, filmmaker, creative director and storyteller. Helping brands, creators and productions craft high-end visual experiences.
       </p>
       <button
@@ -11,7 +11,7 @@ export default function Hero() {
         }}
         className="mt-6 px-6 py-2 bg-black text-white rounded-full"
       >
-        View Work
+        View my work
       </button>
 
     </section>

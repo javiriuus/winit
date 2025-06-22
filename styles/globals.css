@@ -4,6 +4,10 @@
 
 body {
   font-family: 'Inter', sans-serif;
-  background-color: #2a0d3c;
+  background-color: black;
   color: white;
+}
+
+html {
+  scroll-behavior: smooth;
 }
