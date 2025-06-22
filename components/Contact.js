@@ -24,18 +24,41 @@ export default function Contact() {
                 &times;
               </button>
               <h2 className="text-2xl font-bold mb-4 text-black text-center">Contact me!</h2>
-              <form className="space-y-4">
+              <form onSubmit={async (e) => {
+                  e.preventDefault();
+                  const form = e.target;
+                  const res = await fetch("/api/contact", {
+                    method: "POST",
+                    headers: { "Content-Type": "application/json" },
+                    body: JSON.stringify({
+                      name: form.name.value,
+                      email: form.email.value,
+                      message: form.message.value,
+                    }),
+                  });
+
+                  if (res.ok) {
+                    alert("Message sent!");
+                    form.reset();
+                  } else {
+                    alert("Something went wrong. Try again.");
+                  }
+                }}
+                className="space-y-4">
                 <input
+                  name="name"
                   type="text"
                   placeholder="Your Name"
                   className="w-full p-2 border border-gray-300 rounded text-black"
                 />
                 <input
+                  name="email"
                   type="email"
                   placeholder="Your Email"
                   className="w-full p-2 border border-gray-300 rounded text-black"
                 />
                 <textarea
+                  name="message"
                   placeholder="Your Message"
                   className="w-full p-2 border border-gray-300 rounded text-black"
                   rows={4}
