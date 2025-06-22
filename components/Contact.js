@@ -23,7 +23,7 @@ export default function Contact() {
               >
                 &times;
               </button>
-              <h2 className="text-2xl font-bold mb-4 text-black text-center">Contact me!</h2>
+              <h2 className="text-2xl font-bold mb-4 text-black text-center">Contact me! 2</h2>
               <form onSubmit={async (e) => {
                   e.preventDefault();
                   const form = e.target;
