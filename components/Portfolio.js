@@ -13,6 +13,7 @@ export default function Portfolio() {
   ];
 
   const titles = [
+    "S.E.P Shortfilm - TEASER",
     "La belleza del caos",
     "3:08",
     "Valdo - Me gustas más que dormir",
