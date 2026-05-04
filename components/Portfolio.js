@@ -1,5 +1,6 @@
 export default function Portfolio() {
   const videoIds = [
+    "DFPtlqgoOLQ",
     "xUCmm-Ok4Bc",
     "5-3FkJr44uo",
     "Waf-QiBDYzk",
@@ -9,8 +10,6 @@ export default function Portfolio() {
     "J74Wtc5tvGA",
     "6oN7p1lFUac",
     "lCZf0F5PbqY",
-    "DFPtlqgoOLQ",
-    
   ];
 
   const titles = [
