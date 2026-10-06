@@ -1,10 +1,11 @@
 import { useEffect, useRef, useState } from "react";
 import { useLang } from "../lib/i18n";
-import { works, thumb } from "../lib/content";
+import { thumbFor } from "../lib/content";
 import { ArrowIcon, PlayIcon } from "./Icons";
 import Thumb from "./Thumb";
+import Roles from "./Roles";
 
-export default function Portfolio({ onPlay }) {
+export default function Portfolio({ works, onPlay }) {
   const { t } = useLang();
   const [view, setView] = useState("grid");
 
@@ -27,13 +28,13 @@ export default function Portfolio({ onPlay }) {
         </div>
       </div>
 
-      {view === "grid" ? <WorkGrid onPlay={onPlay} t={t} /> : <WorkList onPlay={onPlay} />}
+      {view === "grid" ? <WorkGrid works={works} onPlay={onPlay} t={t} /> : <WorkList works={works} onPlay={onPlay} />}
     </section>
   );
 }
 
 // One large frame per row, in a single column (Samba-style reel).
-function WorkGrid({ onPlay, t }) {
+function WorkGrid({ works, onPlay, t }) {
   const total = String(works.length).padStart(2, "0");
   return (
     <ul className="work-reel">
@@ -41,14 +42,17 @@ function WorkGrid({ onPlay, t }) {
         <li key={w.id} data-vertical={!!w.vertical}>
           <button type="button" className="work-card" onClick={() => onPlay(w)}>
             <span className="work-frame">
-              <Thumb id={w.id} />
+              <Thumb work={w} />
               <span className="work-watch" aria-hidden="true">
                 <PlayIcon />
                 <span className="play-text">{t.watch}</span>
               </span>
             </span>
             <span className="work-cap">
-              <span className="work-title">{w.title}</span>
+              <span className="work-cap-main">
+                <span className="work-title">{w.title}</span>
+                <Roles roles={w.roles} />
+              </span>
               <span className="meta work-count">
                 {String(i + 1).padStart(2, "0")} / {total}
               </span>
@@ -61,7 +65,7 @@ function WorkGrid({ onPlay, t }) {
 }
 
 // Title list with a preview frame that follows the pointer (fine pointers only).
-function WorkList({ onPlay }) {
+function WorkList({ works, onPlay }) {
   const previewRef = useRef(null);
   const [hovered, setHovered] = useState(null);
 
@@ -99,7 +103,10 @@ function WorkList({ onPlay }) {
               onPointerEnter={(e) => e.pointerType === "mouse" && setHovered(w.id)}
               onFocus={() => setHovered(null)}
             >
-              <span className="work-row-title">{w.title}</span>
+              <span className="work-row-main">
+                <span className="work-row-title">{w.title}</span>
+                <Roles roles={w.roles} />
+              </span>
               <span className="arrow">
                 <ArrowIcon size={22} />
               </span>
@@ -109,7 +116,7 @@ function WorkList({ onPlay }) {
       </ul>
       <div className="cursor-preview" ref={previewRef} data-on={hovered !== null} aria-hidden="true">
         {works.map((w) => (
-          <img key={w.id} src={thumb(w.id, "hqdefault")} alt="" data-on={hovered === w.id} loading="lazy" />
+          <img key={w.id} src={thumbFor(w, "hqdefault")} alt="" data-on={hovered === w.id} loading="lazy" />
         ))}
       </div>
     </>

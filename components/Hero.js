@@ -1,12 +1,12 @@
 import { useEffect, useState } from "react";
 import { useLang } from "../lib/i18n";
-import { featuredWork, stills } from "../lib/content";
+import { stills } from "../lib/content";
 import { PlayIcon } from "./Icons";
 import Thumb from "./Thumb";
 
 const INTERVAL = 5200;
 
-export default function Hero({ onPlay }) {
+export default function Hero({ featured, onPlay }) {
   const { t } = useLang();
   const [active, setActive] = useState(0);
   // Frames are mounted progressively and kept, so a fading-out frame never disappears mid-fade.
@@ -67,16 +67,16 @@ export default function Hero({ onPlay }) {
           </div>
         </div>
 
-        <button type="button" className="featured" onClick={() => onPlay(featuredWork)}>
+        <button type="button" className="featured" onClick={() => onPlay(featured)}>
           <span className="featured-thumb">
-            <Thumb id={featuredWork.id} eager />
+            <Thumb work={featured} eager />
             <span className="play-chip">
               <PlayIcon />
               <span className="play-text">{t.play}</span>
             </span>
           </span>
           <span className="featured-meta">
-            <span className="featured-title">{featuredWork.title}</span>
+            <span className="featured-title">{featured.title}</span>
             <span className="meta featured-kicker">{t.latest}</span>
           </span>
         </button>

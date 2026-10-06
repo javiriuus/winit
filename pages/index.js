@@ -9,8 +9,14 @@ import Contact from "../components/Contact";
 import Footer from "../components/Footer";
 import Player from "../components/Player";
 import { useLang } from "../lib/i18n";
+import { featuredOf } from "../lib/content";
+import { resolveWorks } from "../lib/resolve-works";
 
-export default function Home() {
+export async function getStaticProps() {
+  return { props: { works: await resolveWorks() }, revalidate: 86400 };
+}
+
+export default function Home({ works }) {
   const { t } = useLang();
   const [playing, setPlaying] = useState(null);
   const close = useCallback(() => setPlaying(null), []);
@@ -34,8 +40,8 @@ export default function Home() {
       </a>
       <Header />
       <main>
-        <Hero onPlay={setPlaying} />
-        <Portfolio onPlay={setPlaying} />
+        <Hero featured={featuredOf(works)} onPlay={setPlaying} />
+        <Portfolio works={works} onPlay={setPlaying} />
         <Services />
         <OnSet />
         <Contact />

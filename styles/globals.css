@@ -515,7 +515,13 @@ img {
   margin: 0;
   padding: 0;
   display: grid;
+  justify-items: center;
   gap: clamp(3.5rem, 8vw, 7.5rem);
+}
+.work-reel li {
+  width: 100%;
+  display: flex;
+  justify-content: center;
 }
 .work-reel li[data-vertical="false"] .work-card {
   max-width: calc((100vh - 11rem) * 16 / 9);
@@ -523,9 +529,10 @@ img {
 /* Vertical (Short): tall frame with its caption set beside it, bottom-aligned */
 .work-reel li[data-vertical="true"] .work-card {
   display: grid;
-  grid-template-columns: clamp(15rem, 27vw, 25rem) minmax(0, 1fr);
+  grid-template-columns: clamp(15rem, 27vw, 25rem) auto;
   align-items: end;
   gap: clamp(1.25rem, 3vw, 3rem);
+  width: auto;
 }
 .work-reel li[data-vertical="true"] .work-frame {
   aspect-ratio: 9 / 16;
@@ -581,6 +588,14 @@ img {
   letter-spacing: -0.01em;
   line-height: 1.02;
 }
+.work-cap-main {
+  display: grid;
+  gap: 0.6rem;
+  min-width: 0;
+}
+.work-roles {
+  color: var(--bone-dim);
+}
 .work-count {
   flex: none;
   color: var(--bone-dim);
@@ -632,6 +647,11 @@ img {
 }
 .work-list li {
   border-bottom: 1px solid var(--rule);
+}
+.work-row-main {
+  display: grid;
+  gap: 0.5rem;
+  min-width: 0;
 }
 .work-row {
   display: grid;
@@ -1066,6 +1086,10 @@ img {
   align-items: center;
   gap: 1rem;
   margin-top: 1rem;
+}
+.player-meta {
+  display: grid;
+  gap: 0.35rem;
 }
 .player-title {
   font-weight: 500;

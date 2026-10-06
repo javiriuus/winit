@@ -1,6 +1,8 @@
 import { useEffect, useRef } from "react";
 import { useLang } from "../lib/i18n";
 import { CloseIcon } from "./Icons";
+import { embedFor } from "../lib/content";
+import Roles from "./Roles";
 
 // Full-screen cinema player. Esc or the close button returns focus to the trigger.
 export default function Player({ work, onClose }) {
@@ -52,14 +54,17 @@ export default function Player({ work, onClose }) {
       <div className="player-stage" data-vertical={!!work.vertical}>
         <div className="player-video">
           <iframe
-            src={`https://www.youtube-nocookie.com/embed/${work.id}?autoplay=1&rel=0&modestbranding=1&playsinline=1`}
+            src={embedFor(work)}
             title={work.title}
-            allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+            allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; fullscreen"
             allowFullScreen
           />
         </div>
         <div className="player-bar">
-          <span className="player-title">{work.title}</span>
+          <span className="player-meta">
+            <span className="player-title">{work.title}</span>
+            <Roles roles={work.roles} />
+          </span>
           <button type="button" className="player-close" onClick={onClose} ref={closeRef}>
             <CloseIcon />
             {t.close}
