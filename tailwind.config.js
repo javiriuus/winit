@@ -10,7 +10,8 @@ module.exports = {
         bone: "#ecebe6"
       },
       fontFamily: {
-        sans: ["'Schibsted Grotesk'", "ui-sans-serif", "system-ui", "sans-serif"]
+        sans: ["'Schibsted Grotesk'", "ui-sans-serif", "system-ui", "sans-serif"],
+        display: ["'Bodoni Moda Display'", "Didot", "Georgia", "serif"]
       }
     }
   },

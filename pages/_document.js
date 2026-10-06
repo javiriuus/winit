@@ -5,6 +5,7 @@ export default function Document() {
     <Html lang="es">
       <Head>
         <link rel="preload" href="/fonts/schibsted-grotesk.woff" as="font" type="font/woff" crossOrigin="anonymous" />
+        <link rel="preload" href="/fonts/bodoni-moda-display.woff" as="font" type="font/woff" crossOrigin="anonymous" />
         <link rel="icon" href="/logo.png" />
       </Head>
       <body>

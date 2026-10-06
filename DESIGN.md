@@ -19,12 +19,15 @@ No accent color. Photography is shown in black and white. Form errors use `#e482
 
 ## Type
 
-One family: **Schibsted Grotesk** (variable 400–900, self-hosted in `public/fonts`, OFL).
+Two families, both self-hosted in `public/fonts` (OFL):
 
-- Name in hero: 800, `clamp(3.4rem, 12.4vw, 13rem)`, line-height .84, tracking -0.045em (18.5vw on mobile).
-- Section titles: 700, `clamp(2.4rem, 6.2vw, 6rem)`, tracking -0.04em.
-- Contact title: 800, up to 8.75rem.
-- List-view work titles: 700, up to 4.25rem.
+- **Bodoni Moda** (display optical size, weights 400–600) for large display type only: hero name, section titles, contact title, list-view work titles. Always weight 400, never below ~1.8rem, never italic.
+- **Schibsted Grotesk** (variable 400–900) for everything else.
+
+- Name in hero: Bodoni 400, `clamp(3.6rem, 12.8vw, 13.5rem)`, line-height .88, tracking -0.025em (19.5vw on mobile).
+- Section titles: Bodoni 400, `clamp(2.6rem, 6.6vw, 6.5rem)`, tracking -0.02em.
+- Contact title: Bodoni 400, up to 9.25rem.
+- List-view work titles: Bodoni 400, up to 4.75rem.
 - Metadata and controls (`.meta`): 500, .75rem, uppercase, tracking .09em.
 - Body: 400, 1rem / 1.55.
 

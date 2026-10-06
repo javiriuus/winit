@@ -18,6 +18,14 @@
   font-display: swap;
 }
 
+@font-face {
+  font-family: "Bodoni Moda Display";
+  src: url("/fonts/bodoni-moda-display.woff") format("woff");
+  font-weight: 400 600;
+  font-style: normal;
+  font-display: swap;
+}
+
 /* ---------- Tokens ---------- */
 :root {
   --ink: #0b0b0a;
@@ -37,6 +45,7 @@
   --section: clamp(5.5rem, 12vw, 11rem);
 
   --font: "Schibsted Grotesk", ui-sans-serif, system-ui, sans-serif;
+  --font-display: "Bodoni Moda Display", "Bodoni 72", "Didot", Georgia, serif;
   color-scheme: dark;
 }
 
@@ -297,10 +306,11 @@ img {
 }
 .hero-name {
   margin: 0;
-  font-weight: 800;
-  font-size: clamp(3.4rem, 12.4vw, 13rem);
-  line-height: 0.84;
-  letter-spacing: -0.045em;
+  font-family: var(--font-display);
+  font-weight: 400;
+  font-size: clamp(3.6rem, 12.8vw, 13.5rem);
+  line-height: 0.88;
+  letter-spacing: -0.025em;
   text-wrap: balance;
 }
 .hero-name .line {
@@ -419,7 +429,7 @@ img {
 
 @media (max-width: 760px) {
   .hero-name {
-    font-size: 18.5vw;
+    font-size: 19.5vw;
   }
   .hero-inner {
     grid-template-columns: 1fr;
@@ -457,10 +467,11 @@ img {
 }
 .section-title {
   margin: 0;
-  font-weight: 700;
-  font-size: clamp(2.4rem, 6.2vw, 6rem);
-  line-height: 0.92;
-  letter-spacing: -0.04em;
+  font-family: var(--font-display);
+  font-weight: 400;
+  font-size: clamp(2.6rem, 6.6vw, 6.5rem);
+  line-height: 0.95;
+  letter-spacing: -0.02em;
 }
 .section-aside {
   display: flex;
@@ -611,10 +622,11 @@ img {
   cursor: pointer;
 }
 .work-row-title {
-  font-weight: 700;
-  font-size: clamp(1.6rem, 4.4vw, 4.25rem);
-  line-height: 1;
-  letter-spacing: -0.035em;
+  font-family: var(--font-display);
+  font-weight: 400;
+  font-size: clamp(1.8rem, 4.8vw, 4.75rem);
+  line-height: 1.02;
+  letter-spacing: -0.015em;
   transition: color 300ms var(--ease-out), transform 400ms var(--ease-out);
 }
 .work-row .arrow {
@@ -800,10 +812,11 @@ img {
 .contact-title {
   margin: 0 0 clamp(2.5rem, 5vw, 4.5rem);
   max-width: 14ch;
-  font-weight: 800;
-  font-size: clamp(2.8rem, 8.4vw, 8.75rem);
-  line-height: 0.9;
-  letter-spacing: -0.045em;
+  font-family: var(--font-display);
+  font-weight: 400;
+  font-size: clamp(3rem, 8.8vw, 9.25rem);
+  line-height: 0.92;
+  letter-spacing: -0.025em;
   text-wrap: balance;
 }
 .contact-layout {

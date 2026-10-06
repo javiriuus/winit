@@ -1,7 +1,31 @@
 {
-  "colors": {"ink": "#0b0b0a", "ink-2": "#141413", "ink-3": "#1e1e1c", "bone": "#ecebe6", "bone-dim": "#a3a29c", "bone-faint": "#8a8983", "rule": "rgba(236,235,230,0.16)", "rule-strong": "rgba(236,235,230,0.4)", "error": "#e4826f"},
-  "typography": {"family": "Schibsted Grotesk", "weights": [400, 500, 600, 700, 800], "source": "public/fonts (self-hosted, OFL)"},
-  "spacing": {"gutter": "clamp(1rem, 3.2vw, 3rem)", "section": "clamp(5.5rem, 12vw, 11rem)"},
-  "motion": {"ease-out": "cubic-bezier(0.23, 1, 0.32, 1)", "ease-out-expo": "cubic-bezier(0.16, 1, 0.3, 1)", "ease-in-out": "cubic-bezier(0.77, 0, 0.175, 1)"},
-  "radius": {"pill": "999px", "image": "0"}
+  "colors": {
+    "ink": "#0b0b0a",
+    "ink-2": "#141413",
+    "ink-3": "#1e1e1c",
+    "bone": "#ecebe6",
+    "bone-dim": "#a3a29c",
+    "bone-faint": "#8a8983",
+    "rule": "rgba(236,235,230,0.16)",
+    "rule-strong": "rgba(236,235,230,0.4)",
+    "error": "#e4826f"
+  },
+  "typography": {
+    "display": "Bodoni Moda (opsz 96, wght 400)",
+    "body": "Schibsted Grotesk",
+    "source": "public/fonts (self-hosted, OFL)"
+  },
+  "spacing": {
+    "gutter": "clamp(1rem, 3.2vw, 3rem)",
+    "section": "clamp(5.5rem, 12vw, 11rem)"
+  },
+  "motion": {
+    "ease-out": "cubic-bezier(0.23, 1, 0.32, 1)",
+    "ease-out-expo": "cubic-bezier(0.16, 1, 0.3, 1)",
+    "ease-in-out": "cubic-bezier(0.77, 0, 0.175, 1)"
+  },
+  "radius": {
+    "pill": "999px",
+    "image": "0"
+  }
 }
