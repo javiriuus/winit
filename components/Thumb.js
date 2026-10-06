@@ -9,10 +9,17 @@ const ORDER = ["maxresdefault", "sddefault", "hqdefault"];
 export default function Thumb({ work, eager = false, alt = "" }) {
   const [step, setStep] = useState(0);
   const [failed, setFailed] = useState(false);
-  const steps = work.platform === "vimeo" ? 1 : ORDER.length;
+  const steps = work.platform === "youtube" ? ORDER.length : 1;
   const next = () => (step < steps - 1 ? setStep(step + 1) : setFailed(true));
 
-  if (failed || !thumbFor(work)) return null;
+  if (failed || !thumbFor(work)) {
+    // No image available (e.g. Instagram without a still set): show the platform name instead.
+    return work.platform === "instagram" ? (
+      <span className="thumb-type" aria-hidden="true">
+        Instagram
+      </span>
+    ) : null;
+  }
 
   return (
     <img
