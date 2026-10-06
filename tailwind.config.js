@@ -11,7 +11,7 @@ module.exports = {
       },
       fontFamily: {
         sans: ["'Schibsted Grotesk'", "ui-sans-serif", "system-ui", "sans-serif"],
-        display: ["'Bodoni Moda Display'", "Didot", "Georgia", "serif"]
+        display: ["'Noto Serif Display Condensed'", "Didot", "Georgia", "serif"]
       }
     }
   },

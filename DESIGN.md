@@ -21,21 +21,22 @@ No accent color. Photography is shown in black and white. Form errors use `#e482
 
 Two families, both self-hosted in `public/fonts` (OFL):
 
-- **Bodoni Moda** (display optical size, weights 400–600) for large display type only: hero name, section titles, contact title, list-view work titles. Always weight 400, never below ~1.8rem, never italic.
-- **Schibsted Grotesk** (variable 400–900) for everything else.
+- **Noto Serif Display**, cut at 80% width (weights 200–400), for large display type only: hero name, section titles, contact title, list-view work titles. Light weights (250–280), never below ~2rem, never italic.
+- **Schibsted Grotesk** (variable 400–900) for everything else, kept light: 400 for running text, 500 for titles and labels.
 
-- Name in hero: Bodoni 400, `clamp(3.6rem, 12.8vw, 13.5rem)`, line-height .88, tracking -0.025em (19.5vw on mobile).
-- Section titles: Bodoni 400, `clamp(2.6rem, 6.6vw, 6.5rem)`, tracking -0.02em.
-- Contact title: Bodoni 400, up to 9.25rem.
-- List-view work titles: Bodoni 400, up to 4.75rem.
-- Metadata and controls (`.meta`): 500, .75rem, uppercase, tracking .09em.
+- Name in hero: 280, `clamp(4rem, 14vw, 15rem)`, line-height .86, tracking -0.03em (23vw on mobile).
+- Section titles: 250, `clamp(3rem, 7.4vw, 7.5rem)`, tracking -0.025em.
+- Contact title: 250, up to 10.5rem.
+- List-view work titles: 260, up to 5.5rem.
+- Wordmark: 500, tracking .22em, uppercase.
+- Metadata and controls (`.meta`): 500, .75rem, uppercase, tracking .13em.
 - Body: 400, 1rem / 1.55.
 
 ## Layout
 
 - Side gutter `clamp(1rem, 3.2vw, 3rem)`; section spacing `clamp(5.5rem, 12vw, 11rem)`.
 - Section head: title left, controls right, hairline below.
-- Work grid: two columns; every fifth item spans full width in 2.39:1 scope. One column under 760px.
+- Work grid: two columns of 16:9 frames showing each video's own YouTube thumbnail, uncropped and unfiltered. One column under 760px.
 - Services and contact: 5/7 split, intro sticky on desktop.
 - Images are frameless: no borders, radius or shadows.
 

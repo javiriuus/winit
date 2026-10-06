@@ -1,11 +1,16 @@
 import { useState } from "react";
 import { thumb } from "../lib/content";
 
-// YouTube only generates the high-resolution frame for some uploads; when it is
-// missing it returns a 120px placeholder, so fall back to the always-present one.
+// Same thumbnail the video shows on YouTube. The HD version only exists for some
+// uploads (YouTube answers with a 120px placeholder otherwise), so step down
+// through the sizes until one exists.
+const ORDER = ["maxresdefault", "sddefault", "hqdefault"];
+
 export default function Thumb({ id, eager = false, alt = "" }) {
-  const [quality, setQuality] = useState("maxresdefault");
+  const [step, setStep] = useState(0);
   const [failed, setFailed] = useState(false);
+  const quality = ORDER[step];
+  const next = () => (step < ORDER.length - 1 ? setStep(step + 1) : setFailed(true));
 
   if (failed) return null;
 
@@ -16,9 +21,9 @@ export default function Thumb({ id, eager = false, alt = "" }) {
       loading={eager ? "eager" : "lazy"}
       decoding="async"
       onLoad={(e) => {
-        if (quality === "maxresdefault" && e.currentTarget.naturalWidth <= 120) setQuality("hqdefault");
+        if (step < ORDER.length - 1 && e.currentTarget.naturalWidth <= 120) next();
       }}
-      onError={() => (quality === "hqdefault" ? setFailed(true) : setQuality("hqdefault"))}
+      onError={next}
     />
   );
 }
