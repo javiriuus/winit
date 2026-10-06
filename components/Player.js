@@ -49,7 +49,7 @@ export default function Player({ work, onClose }) {
       ref={dialogRef}
       onClick={(e) => e.target === e.currentTarget && onClose()}
     >
-      <div className="player-stage">
+      <div className="player-stage" data-vertical={!!work.vertical}>
         <div className="player-video">
           <iframe
             src={`https://www.youtube-nocookie.com/embed/${work.id}?autoplay=1&rel=0&modestbranding=1&playsinline=1`}

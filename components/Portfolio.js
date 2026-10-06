@@ -32,11 +32,13 @@ export default function Portfolio({ onPlay }) {
   );
 }
 
+// One large frame per row, in a single column (Samba-style reel).
 function WorkGrid({ onPlay, t }) {
+  const total = String(works.length).padStart(2, "0");
   return (
-    <ul className="work-grid">
-      {works.map((w) => (
-        <li key={w.id}>
+    <ul className="work-reel">
+      {works.map((w, i) => (
+        <li key={w.id} data-vertical={!!w.vertical}>
           <button type="button" className="work-card" onClick={() => onPlay(w)}>
             <span className="work-frame">
               <Thumb id={w.id} />
@@ -47,6 +49,9 @@ function WorkGrid({ onPlay, t }) {
             </span>
             <span className="work-cap">
               <span className="work-title">{w.title}</span>
+              <span className="meta work-count">
+                {String(i + 1).padStart(2, "0")} / {total}
+              </span>
             </span>
           </button>
         </li>

@@ -510,13 +510,37 @@ img {
   color: var(--ink);
 }
 
-.work-grid {
+.work-reel {
   list-style: none;
   margin: 0;
   padding: 0;
   display: grid;
-  grid-template-columns: repeat(2, minmax(0, 1fr));
-  gap: clamp(2.5rem, 5vw, 4.5rem) clamp(1rem, 2.4vw, 2.25rem);
+  gap: clamp(3.5rem, 8vw, 7.5rem);
+}
+.work-reel li[data-vertical="false"] .work-card {
+  max-width: calc((100vh - 11rem) * 16 / 9);
+}
+/* Vertical (Short): tall frame with its caption set beside it, bottom-aligned */
+.work-reel li[data-vertical="true"] .work-card {
+  display: grid;
+  grid-template-columns: clamp(15rem, 27vw, 25rem) minmax(0, 1fr);
+  align-items: end;
+  gap: clamp(1.25rem, 3vw, 3rem);
+}
+.work-reel li[data-vertical="true"] .work-frame {
+  aspect-ratio: 9 / 16;
+}
+.work-reel li[data-vertical="true"] .work-cap {
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 0.75rem;
+  margin-top: 0;
+}
+@media (max-width: 560px) {
+  .work-reel li[data-vertical="true"] .work-card {
+    grid-template-columns: 1fr;
+    width: min(100%, 20rem);
+  }
 }
 .work-card {
   display: block;
@@ -548,13 +572,19 @@ img {
   justify-content: space-between;
   align-items: baseline;
   gap: 1rem;
-  margin-top: 1rem;
+  margin-top: clamp(1rem, 1.6vw, 1.4rem);
 }
 .work-title {
-  font-weight: 500;
-  font-size: clamp(1.2rem, 1.9vw, 1.75rem);
-  letter-spacing: -0.015em;
-  line-height: 1.2;
+  font-family: var(--font-display);
+  font-weight: 360;
+  font-size: clamp(1.9rem, 3.6vw, 3.4rem);
+  letter-spacing: -0.01em;
+  line-height: 1.02;
+}
+.work-count {
+  flex: none;
+  color: var(--bone-dim);
+  font-variant-numeric: tabular-nums;
 }
 .work-watch {
   position: absolute;
@@ -685,9 +715,6 @@ img {
 }
 
 @media (max-width: 760px) {
-  .work-grid {
-    grid-template-columns: 1fr;
-  }
   .work-watch {
     opacity: 1;
     transform: none;
@@ -1001,6 +1028,14 @@ img {
 }
 .player-stage {
   width: min(100%, calc((100vh - 9rem) * 16 / 9), 88rem);
+}
+.player-stage[data-vertical="true"] {
+  width: min(100%, calc((100vh - 9rem) * 9 / 16), 30rem);
+}
+.player-stage[data-vertical="true"] .player-video {
+  aspect-ratio: 9 / 16;
+}
+.player-stage {
   animation: stageIn 320ms var(--ease-out) both;
 }
 @keyframes stageIn {

@@ -36,7 +36,7 @@ Two families, both self-hosted in `public/fonts` (OFL):
 
 - Side gutter `clamp(1rem, 3.2vw, 3rem)`; section spacing `clamp(5.5rem, 12vw, 11rem)`.
 - Section head: title left, controls right, hairline below.
-- Work grid: two columns of 16:9 frames showing each video's own YouTube thumbnail, uncropped and unfiltered. One column under 760px.
+- Work gallery: one large frame per row in a single column (Samba-style reel), each video's own YouTube thumbnail, uncropped and unfiltered. Caption: title in the display face, "01 / 11" position on the right. Vertical Shorts get a 9:16 frame at a narrower width; the player switches to 9:16 for them.
 - Services and contact: 5/7 split, intro sticky on desktop.
 - Images are frameless: no borders, radius or shadows.
 
