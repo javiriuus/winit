@@ -1,79 +1,114 @@
 import { useState } from "react";
+import { useLang } from "../lib/i18n";
+import { contactEmail, social } from "../lib/content";
+import { ArrowIcon } from "./Icons";
+
+const emailOk = (v) => /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(v);
 
 export default function Contact() {
-  const [isOpen, setIsOpen] = useState(false);
+  const { t } = useLang();
+  const [status, setStatus] = useState("idle"); // idle | invalid | sending | sent | error
+  const [invalid, setInvalid] = useState({});
+
+  async function onSubmit(e) {
+    e.preventDefault();
+    const form = e.currentTarget;
+    const data = {
+      name: form.name.value.trim(),
+      email: form.email.value.trim(),
+      message: form.message.value.trim(),
+    };
+    const bad = { name: !data.name, email: !emailOk(data.email), message: !data.message };
+    setInvalid(bad);
+    if (bad.name || bad.email || bad.message) {
+      setStatus("invalid");
+      return;
+    }
+
+    setStatus("sending");
+    try {
+      const res = await fetch("/api/contact", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify(data),
+      });
+      if (!res.ok) throw new Error("send failed");
+      setStatus("sent");
+      form.reset();
+    } catch (err) {
+      setStatus("error");
+    }
+  }
+
+  const message =
+    status === "invalid" ? t.required : status === "sent" ? t.sent : status === "error" ? t.failed : "";
 
   return (
-    <>
-      <section id="contact" className="text-center py-16 px-6">
-        <h2 className="text-3xl font-bold">Ready to Bring Your Vision to Life?</h2>
-        <button
-          onClick={() => setIsOpen(true)}
-          className="mt-6 px-6 py-2 bg-white text-black rounded-full"
-        >
-          Get in Touch
-        </button>
+    <section id="contact" className="contact" aria-labelledby="contact-title">
+      <h2 id="contact-title" className="contact-title">
+        {t.contactTitle}
+      </h2>
 
-        {isOpen && (
-          <div className="fixed inset-0 bg-black/60 backdrop-blur-sm flex justify-center items-center z-50">
-            <div className="bg-white p-6 rounded-lg max-w-md w-full relative">
-              <button
-                className="absolute top-2 right-2 text-black text-xl"
-                onClick={() => setIsOpen(false)}
-              >
-                &times;
-              </button>
-              <h2 className="text-2xl font-bold mb-4 text-black text-center">Contact me!</h2>
-              <form onSubmit={async (e) => {
-                  e.preventDefault();
-                  const form = e.target;
-                  const res = await fetch("/api/contact", {
-                    method: "POST",
-                    headers: { "Content-Type": "application/json" },
-                    body: JSON.stringify({
-                      name: form.name.value,
-                      email: form.email.value,
-                      message: form.message.value,
-                    }),
-                  });
+      <div className="contact-layout">
+        <div>
+          <p className="contact-intro">{t.contactIntro}</p>
+          <span className="contact-or">{t.orWrite}</span>
+          <a className="contact-mail link-line" href={`mailto:${contactEmail}`}>
+            {contactEmail}
+          </a>
+          <div className="contact-social">
+            {social.map((s) => (
+              <a key={s.key} href={s.href} target="_blank" rel="noopener noreferrer" className="link-line">
+                {s.label}
+              </a>
+            ))}
+          </div>
+        </div>
 
-                  if (res.ok) {
-                    alert("Message sent!");
-                    form.reset();
-                  } else {
-                    alert("Something went wrong. Try again.");
-                  }
-                }}
-                className="space-y-4">
-                <input
-                  name="name"
-                  type="text"
-                  placeholder="Your Name"
-                  className="w-full p-2 border border-gray-300 rounded text-black"
-                />
-                <input
-                  name="email"
-                  type="email"
-                  placeholder="Your Email"
-                  className="w-full p-2 border border-gray-300 rounded text-black"
-                />
-                <textarea
-                  name="message"
-                  placeholder="Your Message"
-                  className="w-full p-2 border border-gray-300 rounded text-black"
-                  rows={4}
-                />
-                <button
-                  type="submit"
-                  className="bg-black text-white px-4 py-2 rounded hover:bg-gray-800 transition w-full"
-                >
-                  Send
-                </button>
-              </form>
+        <form className="form" onSubmit={onSubmit} noValidate>
+          <div className="form-row">
+            <div className="field">
+              <label className="meta" htmlFor="f-name">
+                {t.name}
+              </label>
+              <input id="f-name" name="name" type="text" autoComplete="name" aria-invalid={!!invalid.name} />
+            </div>
+            <div className="field">
+              <label className="meta" htmlFor="f-email">
+                {t.email}
+              </label>
+              <input
+                id="f-email"
+                name="email"
+                type="email"
+                autoComplete="email"
+                inputMode="email"
+                aria-invalid={!!invalid.email}
+              />
             </div>
           </div>
-        )}
-      </section>
-    </>
+          <div className="field">
+            <label className="meta" htmlFor="f-message">
+              {t.message}
+            </label>
+            <textarea id="f-message" name="message" rows={4} aria-invalid={!!invalid.message} />
+          </div>
+          <div className="form-foot">
+            <button className="btn" type="submit" disabled={status === "sending"}>
+              {status === "sending" ? t.sending : t.send}
+              <ArrowIcon size={16} />
+            </button>
+            <p
+              className="form-status"
+              role="status"
+              aria-live="polite"
+              data-tone={status === "sent" ? "ok" : status === "idle" || status === "sending" ? "" : "error"}
+            >
+              {message}
+            </p>
+          </div>
+        </form>
+      </div>
+    </section>
   );
 }

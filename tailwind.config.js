@@ -6,12 +6,11 @@ module.exports = {
   theme: {
     extend: {
       colors: {
-        primary: "#2a0d3c",
-        accent: "#f4c221"
+        ink: "#0b0b0a",
+        bone: "#ecebe6"
       },
       fontFamily: {
-        display: ["'Bebas Neue'", "sans-serif"],
-        body: ["'Inter'", "sans-serif"]
+        sans: ["'Schibsted Grotesk'", "ui-sans-serif", "system-ui", "sans-serif"]
       }
     }
   },

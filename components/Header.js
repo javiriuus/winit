@@ -1,35 +1,47 @@
-import Image from "next/image";
-import Link from "next/link";
-import { FaInstagram, FaYoutube, FaLinkedin } from "react-icons/fa";
+import { useEffect, useState } from "react";
+import { useLang } from "../lib/i18n";
 
 export default function Header() {
-  return (
-    <header className="fixed top-0 left-0 w-full z-50 bg-black/50 text-white px-6 py-4 flex justify-between items-center">
-      {/* Logo + Nombre */}
-      <div className="flex items-center space-x-4">
-        <Image src="/logo.png" alt="Logo" width={80} height={80} />
-        <span className="text-xl font-bold">WinitMoney</span>
-      </div>
+  const { lang, setLang, t } = useLang();
+  const [solid, setSolid] = useState(false);
 
-      {/* Navegación */}
-      <nav className="hidden md:flex space-x-6">
-        <a href="#hero" className="hover:underline scroll-smooth">Home</a>
-        <a href="#services" className="hover:underline scroll-smooth">Services</a>
-        <a href="#portfolio" className="hover:underline scroll-smooth">Work</a>
-        <a href="#contact" className="hover:underline scroll-smooth">Contact</a>
+  useEffect(() => {
+    const onScroll = () => setSolid(window.scrollY > window.innerHeight * 0.6);
+    onScroll();
+    window.addEventListener("scroll", onScroll, { passive: true });
+    return () => window.removeEventListener("scroll", onScroll);
+  }, []);
+
+  return (
+    <header className="site-header" data-solid={solid}>
+      <a href="#top" className="wordmark" aria-label="Javier Llarena">
+        Javier Llarena
+      </a>
+
+      <nav className="site-nav" aria-label="Principal">
+        <a href="#work" className="link-line">
+          {t.navWork}
+        </a>
+        <a href="#services" className="link-line">
+          {t.navServices}
+        </a>
+        <a href="#contact" className="link-line nav-contact">
+          {t.navContact}
+        </a>
       </nav>
 
-      {/* Redes sociales */}
-      <div className="flex space-x-4">
-        <a href="https://www.instagram.com/javierllarenafilms/" target="_blank" rel="noopener noreferrer">
-          <FaInstagram className="text-xl hover:scale-110 transition" />
-        </a>
-        <a href="https://www.youtube.com/@javirius5294" target="_blank" rel="noopener noreferrer">
-          <FaYoutube className="text-xl hover:scale-110 transition" />
-        </a>
-        <a href="https://www.linkedin.com/in/javier-llarena-s%C3%A1nchez-33b7371b9/" target="_blank" rel="noopener noreferrer">
-          <FaLinkedin className="text-xl hover:scale-110 transition" />
-        </a>
+      <div className="header-end">
+        <div className="lang" role="group" aria-label={t.langLabel}>
+          <button type="button" aria-pressed={lang === "es"} onClick={() => setLang("es")} lang="es">
+            ES
+          </button>
+          <span className="lang-sep" aria-hidden="true">
+            /
+          </span>
+          <button type="button" aria-pressed={lang === "en"} onClick={() => setLang("en")} lang="en">
+            EN
+          </button>
+        </div>
       </div>
     </header>
   );

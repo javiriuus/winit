@@ -9,3 +9,6 @@ yarn-debug.log*
 yarn-error.log*
 *.local
 *.log
+
+# design review captures
+.impeccable/review/

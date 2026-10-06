@@ -1,51 +1,112 @@
-export default function Portfolio() {
-  const videoIds = [
-    "DFPtlqgoOLQ",
-    "xUCmm-Ok4Bc",
-    "5-3FkJr44uo",
-    "Waf-QiBDYzk",
-    "yJXVszisGY8",
-    "ARZivn1zl1w",
-    "aluL0g5vKYo",
-    "J74Wtc5tvGA",
-    "6oN7p1lFUac",
-    "lCZf0F5PbqY",
-  ];
+import { useEffect, useRef, useState } from "react";
+import { useLang } from "../lib/i18n";
+import { works, thumb } from "../lib/content";
+import { ArrowIcon, PlayIcon } from "./Icons";
+import Thumb from "./Thumb";
 
-  const titles = [
-    "S.E.P Shortfilm - TEASER",
-    "La belleza del caos",
-    "3:08",
-    "Valdo - Me gustas más que dormir",
-    "Aún Recuerdo",
-    "TÓXICO",
-    "Te he vuelto a ver",
-    "PRENDE EL BLON",
-    "Y si...?",
-    "Miénteme Como Sabes",
-    
-  ];
+export default function Portfolio({ onPlay }) {
+  const { t } = useLang();
+  const [view, setView] = useState("grid");
 
   return (
-    <section id="portfolio" className="py-12 px-6 md:px-16 lg:px-24">
-      <h2 className="text-3xl font-bold text-center mb-12">Selected Work</h2>
-      <div className="grid gap-10 md:grid-cols-1 lg:grid-cols-2">
-        {videoIds.map((id, index) => (
-          <div key={index} className="rounded-lg bg-black/60 backdrop-blur-md p-4 shadow-xl">
-            <div className="aspect-video overflow-hidden rounded">
-              <iframe
-                src={`https://www.youtube.com/embed/${id}`}
-                title={`Video ${index + 1}`}
-                frameBorder="0"
-                allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
-                allowFullScreen
-                className="w-full h-full"
-              ></iframe>
-            </div>
-            <p className="text-white text-center mt-2 text-sm">{titles[index]}</p>
+    <section id="work" className="section" aria-labelledby="work-title">
+      <div className="section-head">
+        <h2 id="work-title" className="section-title">
+          {t.workTitle}
+        </h2>
+        <div className="section-aside">
+          <span className="meta">{t.workCount(works.length)}</span>
+          <div className="view-toggle" role="group" aria-label={t.viewLabel}>
+            <button type="button" aria-pressed={view === "grid"} onClick={() => setView("grid")}>
+              {t.viewGrid}
+            </button>
+            <button type="button" aria-pressed={view === "list"} onClick={() => setView("list")}>
+              {t.viewList}
+            </button>
           </div>
+        </div>
+      </div>
+
+      {view === "grid" ? <WorkGrid onPlay={onPlay} t={t} /> : <WorkList onPlay={onPlay} />}
+    </section>
+  );
+}
+
+function WorkGrid({ onPlay, t }) {
+  return (
+    <ul className="work-grid">
+      {works.map((w) => (
+        <li key={w.id}>
+          <button type="button" className="work-card" onClick={() => onPlay(w)}>
+            <span className="work-frame">
+              <Thumb id={w.id} />
+              <span className="work-watch" aria-hidden="true">
+                <PlayIcon />
+                <span className="play-text">{t.watch}</span>
+              </span>
+            </span>
+            <span className="work-cap">
+              <span className="work-title">{w.title}</span>
+            </span>
+          </button>
+        </li>
+      ))}
+    </ul>
+  );
+}
+
+// Title list with a preview frame that follows the pointer (fine pointers only).
+function WorkList({ onPlay }) {
+  const previewRef = useRef(null);
+  const [hovered, setHovered] = useState(null);
+
+  useEffect(() => {
+    const el = previewRef.current;
+    if (!el) return;
+    let raf = 0;
+    const onMove = (e) => {
+      cancelAnimationFrame(raf);
+      raf = requestAnimationFrame(() => {
+        const w = el.offsetWidth;
+        const h = el.offsetHeight;
+        const x = Math.min(e.clientX + 24, window.innerWidth - w - 16);
+        const y = Math.min(Math.max(e.clientY - h / 2, 16), window.innerHeight - h - 16);
+        el.style.setProperty("--x", `${x}px`);
+        el.style.setProperty("--y", `${y}px`);
+      });
+    };
+    window.addEventListener("pointermove", onMove, { passive: true });
+    return () => {
+      cancelAnimationFrame(raf);
+      window.removeEventListener("pointermove", onMove);
+    };
+  }, []);
+
+  return (
+    <>
+      <ul className="work-list" onPointerLeave={() => setHovered(null)}>
+        {works.map((w) => (
+          <li key={w.id}>
+            <button
+              type="button"
+              className="work-row"
+              onClick={() => onPlay(w)}
+              onPointerEnter={(e) => e.pointerType === "mouse" && setHovered(w.id)}
+              onFocus={() => setHovered(null)}
+            >
+              <span className="work-row-title">{w.title}</span>
+              <span className="arrow">
+                <ArrowIcon size={22} />
+              </span>
+            </button>
+          </li>
+        ))}
+      </ul>
+      <div className="cursor-preview" ref={previewRef} data-on={hovered !== null} aria-hidden="true">
+        {works.map((w) => (
+          <img key={w.id} src={thumb(w.id, "hqdefault")} alt="" data-on={hovered === w.id} loading="lazy" />
         ))}
       </div>
-    </section>
+    </>
   );
 }

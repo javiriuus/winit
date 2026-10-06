@@ -6,7 +6,10 @@ export default async function handler(req, res) {
     return res.status(405).send({ message: "Only POST requests allowed" });
   }
 
-  const { name, email, message } = req.body;
+  const { name, email, message } = req.body || {};
+  if (!name || !email || !message || !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) {
+    return res.status(400).json({ success: false });
+  }
 
   const transporter = nodemailer.createTransport({
     service: "gmail", // o "hotmail", "yahoo", etc.
@@ -20,7 +23,8 @@ export default async function handler(req, res) {
 
   try {
     await transporter.sendMail({
-      from: email,
+      from: process.env.EMAIL_USER,
+      replyTo: email,
       to: process.env.EMAIL_USER, //de momento es el mismo
       subject: `New web message from ${name}`,
       text: fullMessage,

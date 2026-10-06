@@ -1,26 +1,47 @@
+import { useCallback, useState } from "react";
+import Head from "next/head";
+import Header from "../components/Header";
 import Hero from "../components/Hero";
-import Services from "../components/Services";
 import Portfolio from "../components/Portfolio";
-import Credits from "../components/Credits";
+import Services from "../components/Services";
+import OnSet from "../components/OnSet";
 import Contact from "../components/Contact";
 import Footer from "../components/Footer";
-import Header from "../components/Header";
-import BackgroundSlideshow from "../components/BackgroundSlideshow";
-
+import Player from "../components/Player";
+import { useLang } from "../lib/i18n";
 
 export default function Home() {
+  const { t } = useLang();
+  const [playing, setPlaying] = useState(null);
+  const close = useCallback(() => setPlaying(null), []);
+
   return (
-    <div className="relative w-full h-full min-h-screen overflow-hidden">
-      <BackgroundSlideshow />
-      <div className="relative z-10">
-        <Header />
-        <Hero />
+    <>
+      <Head>
+        <title>Javier Llarena — Director</title>
+        <meta
+          name="description"
+          content="Javier Llarena, cineasta, director creativo y director de fotografía. Videoclips, cortometrajes y contenido de marca."
+        />
+        <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
+        <meta name="theme-color" content="#0b0b0a" />
+        <meta property="og:title" content="Javier Llarena — Director" />
+        <meta property="og:image" content="/images/000026.JPG" />
+      </Head>
+
+      <a className="skip" href="#work">
+        {t.skip}
+      </a>
+      <Header />
+      <main>
+        <Hero onPlay={setPlaying} />
+        <Portfolio onPlay={setPlaying} />
         <Services />
-        <Portfolio />
-        {/* <Credits /> */}
+        <OnSet />
         <Contact />
-        <Footer />
-      </div>
-    </div>
+      </main>
+      <Footer />
+      <Player work={playing} onClose={close} />
+    </>
   );
 }
