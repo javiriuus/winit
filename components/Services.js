@@ -13,7 +13,6 @@ export default function Services() {
       </div>
 
       <div className="services-layout">
-        <p className="services-intro">{t.servicesIntro}</p>
         <ul className="services-list">
           {services.map((s) => (
             <li className="service" key={s.en.title}>

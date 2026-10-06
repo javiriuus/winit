@@ -3,6 +3,7 @@ import Head from "next/head";
 import Header from "../components/Header";
 import Hero from "../components/Hero";
 import Portfolio from "../components/Portfolio";
+import About from "../components/About";
 import Services from "../components/Services";
 import OnSet from "../components/OnSet";
 import Contact from "../components/Contact";
@@ -42,6 +43,7 @@ export default function Home({ works }) {
       <main>
         <Hero featured={featuredOf(works)} onPlay={setPlaying} />
         <Portfolio works={works} onPlay={setPlaying} />
+        <About />
         <Services />
         <OnSet />
         <Contact />

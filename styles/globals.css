@@ -747,10 +747,42 @@ img {
 }
 
 /* ---------- Services ---------- */
-.services-layout {
+/* ---------- About ---------- */
+.about-statement {
+  margin: 0;
+  max-width: 18ch;
+  font-family: var(--font-display);
+  font-weight: 360;
+  font-size: clamp(2.6rem, 6.4vw, 6.75rem);
+  line-height: 0.98;
+  letter-spacing: -0.02em;
+  text-wrap: balance;
+}
+.about-body {
   display: grid;
-  grid-template-columns: minmax(0, 5fr) minmax(0, 7fr);
-  gap: clamp(2rem, 6vw, 6rem);
+  gap: 1.25rem;
+  max-width: 40rem;
+  margin: clamp(2.5rem, 5vw, 4.5rem) 0 0 auto;
+  padding-top: clamp(1.5rem, 3vw, 2.5rem);
+  border-top: 1px solid var(--rule);
+}
+.about-body p {
+  margin: 0;
+  color: var(--bone-dim);
+  font-size: clamp(1.05rem, 1.3vw, 1.2rem);
+  line-height: 1.6;
+}
+.about-body p:first-child {
+  color: var(--bone);
+}
+@media (max-width: 760px) {
+  .about-body {
+    margin-left: 0;
+  }
+}
+
+.services-layout {
+  display: block;
 }
 .services-intro {
   margin: 0;
