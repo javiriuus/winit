@@ -21,13 +21,13 @@ No accent color. Photography is shown in black and white. Form errors use `#e482
 
 Two families, both self-hosted in `public/fonts` (OFL):
 
-- **Noto Serif Display**, cut at 80% width (weights 200–400), for large display type only: hero name, section titles, contact title, list-view work titles. Light weights (250–280), never below ~2rem, never italic.
+- **Noto Serif Display**, cut at 80% width (weights 200–400), for large display type only: hero name, section titles, contact title, list-view work titles. Weights 360–380 (lighter loses legibility over photos), never below ~2rem, never italic.
 - **Schibsted Grotesk** (variable 400–900) for everything else, kept light: 400 for running text, 500 for titles and labels.
 
-- Name in hero: 280, `clamp(4rem, 14vw, 15rem)`, line-height .86, tracking -0.03em (23vw on mobile).
-- Section titles: 250, `clamp(3rem, 7.4vw, 7.5rem)`, tracking -0.025em.
-- Contact title: 250, up to 10.5rem.
-- List-view work titles: 260, up to 5.5rem.
+- Name in hero: 380, soft text-shadow, `clamp(4rem, 14vw, 15rem)`, line-height .86, tracking -0.03em (23vw on mobile).
+- Section titles: 360, `clamp(3rem, 7.4vw, 7.5rem)`, tracking -0.025em.
+- Contact title: 360, up to 10.5rem.
+- List-view work titles: 360, up to 5.5rem.
 - Wordmark: 500, tracking .22em, uppercase.
 - Metadata and controls (`.meta`): 500, .75rem, uppercase, tracking .13em.
 - Body: 400, 1rem / 1.55.

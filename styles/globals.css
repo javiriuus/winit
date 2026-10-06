@@ -292,7 +292,7 @@ img {
   inset: 0;
   z-index: -1;
   background:
-    linear-gradient(to top, rgba(11, 11, 10, 0.92) 0%, rgba(11, 11, 10, 0.55) 34%, rgba(11, 11, 10, 0) 62%),
+    linear-gradient(to top, rgba(11, 11, 10, 0.94) 0%, rgba(11, 11, 10, 0.7) 38%, rgba(11, 11, 10, 0.15) 70%),
     linear-gradient(to bottom, rgba(11, 11, 10, 0.55) 0%, rgba(11, 11, 10, 0) 18%);
 }
 
@@ -308,16 +308,19 @@ img {
 .hero-name {
   margin: 0;
   font-family: var(--font-display);
-  font-weight: 280;
+  font-weight: 380;
   font-size: clamp(4rem, 14vw, 15rem);
   line-height: 0.86;
-  letter-spacing: -0.03em;
+  letter-spacing: -0.02em;
+  text-shadow: 0 2px 24px rgba(0, 0, 0, 0.35);
   text-wrap: balance;
 }
 .hero-name .line {
   display: block;
   overflow: hidden;
-  padding-bottom: 0.04em;
+  /* room for the J's descender inside the reveal mask */
+  padding-bottom: 0.22em;
+  margin-bottom: -0.18em;
 }
 .hero-name .line > span {
   display: block;
@@ -469,10 +472,10 @@ img {
 .section-title {
   margin: 0;
   font-family: var(--font-display);
-  font-weight: 250;
+  font-weight: 360;
   font-size: clamp(3rem, 7.4vw, 7.5rem);
   line-height: 0.92;
-  letter-spacing: -0.025em;
+  letter-spacing: -0.015em;
 }
 .section-aside {
   display: flex;
@@ -616,10 +619,10 @@ img {
 }
 .work-row-title {
   font-family: var(--font-display);
-  font-weight: 260;
+  font-weight: 360;
   font-size: clamp(2.1rem, 5.6vw, 5.5rem);
   line-height: 1;
-  letter-spacing: -0.02em;
+  letter-spacing: -0.01em;
   transition: color 300ms var(--ease-out), transform 400ms var(--ease-out);
 }
 .work-row .arrow {
@@ -803,10 +806,10 @@ img {
   margin: 0 0 clamp(2.5rem, 5vw, 4.5rem);
   max-width: 14ch;
   font-family: var(--font-display);
-  font-weight: 250;
+  font-weight: 360;
   font-size: clamp(3.4rem, 10vw, 10.5rem);
   line-height: 0.9;
-  letter-spacing: -0.03em;
+  letter-spacing: -0.02em;
   text-wrap: balance;
 }
 .contact-layout {
