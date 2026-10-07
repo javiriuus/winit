@@ -40,27 +40,71 @@ function WorkGrid({ works, onPlay, t }) {
     <ul className="work-reel">
       {works.map((w, i) => (
         <li key={w.id} data-vertical={!!w.vertical}>
-          <button type="button" className="work-card" onClick={() => onPlay(w)}>
-            <span className="work-frame">
-              <Thumb work={w} />
-              <span className="work-watch" aria-hidden="true">
-                <PlayIcon />
-                <span className="play-text">{t.watch}</span>
-              </span>
-            </span>
-            <span className="work-cap">
-              <span className="work-cap-main">
-                <span className="work-title">{w.title}</span>
-                <Roles roles={w.roles} />
-              </span>
-              <span className="meta work-count">
-                {String(i + 1).padStart(2, "0")} / {total}
-              </span>
-            </span>
-          </button>
+          <WorkCard w={w} i={i} total={total} onPlay={onPlay} t={t} />
+          <WorkDetails w={w} />
         </li>
       ))}
     </ul>
+  );
+}
+
+function WorkCard({ w, i, total, onPlay, t }) {
+  return (
+    <button type="button" className="work-card" onClick={() => onPlay(w)}>
+      <span className="work-frame">
+        <Thumb work={w} />
+        <span className="work-watch" aria-hidden="true">
+          <PlayIcon />
+          <span className="play-text">{t.watch}</span>
+        </span>
+      </span>
+      <span className="work-cap">
+        <span className="work-cap-main">
+          <span className="work-title">{w.title}</span>
+          <Roles roles={w.roles} />
+        </span>
+        <span className="meta work-count">
+          {String(i + 1).padStart(2, "0")} / {total}
+        </span>
+      </span>
+    </button>
+  );
+}
+
+// Extended sheet for works that have it (synopsis, festival selections, stills).
+function WorkDetails({ w }) {
+  const { lang, t } = useLang();
+  if (!w.synopsis && !w.selections && !w.stills) return null;
+  return (
+    <div className="work-details">
+      <div className="work-details-text">
+        {w.synopsis && (
+          <div className="work-synopsis">
+            <h3 className="meta">{t.synopsisLabel}</h3>
+            <p>{w.synopsis[lang]}</p>
+          </div>
+        )}
+        {w.selections && (
+          <div className="work-selections">
+            <h3 className="meta">{t.selectionsLabel}</h3>
+            <ul>
+              {w.selections.map((f) => (
+                <li key={f}>{f}</li>
+              ))}
+            </ul>
+          </div>
+        )}
+      </div>
+      {w.stills && (
+        <ul className="work-stills" aria-label={t.stillsLabel(w.title)}>
+          {w.stills.map((src) => (
+            <li key={src}>
+              <img src={src} alt="" loading="lazy" decoding="async" />
+            </li>
+          ))}
+        </ul>
+      )}
+    </div>
   );
 }
 

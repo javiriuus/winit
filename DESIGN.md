@@ -15,7 +15,7 @@ Production-company register in the line of A24 and Samba Films: near-black groun
 | `--rule` | `rgba(236,235,230,.16)` | Hairline section and list rules |
 | `--rule-strong` | `rgba(236,235,230,.4)` | Input underlines, outlined controls |
 
-No accent color. Photography is shown in black and white. Form errors use `#e4826f`.
+No accent color. Behind-the-scenes photography is shown in black and white; film stills inside a work's sheet keep their own color. Form errors use `#e4826f`.
 
 ## Type
 
@@ -37,6 +37,7 @@ Two families, both self-hosted in `public/fonts` (OFL):
 - Side gutter `clamp(1rem, 3.2vw, 3rem)`; section spacing `clamp(5.5rem, 12vw, 11rem)`.
 - Section head: title left, controls right, hairline below.
 - Work gallery: one large frame per row in a single column (Samba-style reel), each video's own YouTube thumbnail, uncropped and unfiltered. Reel items are centered. Caption: title in the display face with the roles in `.meta` under it, position ("01 / 14") on the right. Vertical Shorts get a 9:16 frame at a narrower width; the player switches to 9:16 for them.
+- Work sheet (optional per work, e.g. the latest short): under the caption, a hairline, then synopsis (2/3) and festival selections in the display face (1/3), then the film stills in a 2-column 3:2 grid, same width as the frame.
 - Services and contact: 5/7 split, intro sticky on desktop.
 - Images are frameless: no borders, radius or shadows.
 
