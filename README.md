@@ -114,7 +114,7 @@ Primer párrafo del texto. Puedes usar **negrita**, *cursiva* y [enlaces](https:
 
 Todas las imágenes de la carpeta `public/fotografia` aparecen solas en javierllarenafilms.com/fotografia.
 
-**Orden:** por la fecha en que se hizo la foto (de la más reciente a la más antigua), leída de los metadatos EXIF del archivo. Si una foto no tiene fecha en los metadatos (por ejemplo, las que pasan por WhatsApp, que los borra), puedes ponerla al principio del nombre del archivo: `2023-05-12-nueva-york.jpg`. Las fotos sin ninguna fecha salen al final en orden aleatorio.
+**Orden:** por la fecha en que se hizo la foto (de la más reciente a la más antigua), leída de los metadatos EXIF del archivo. Si una foto no tiene fecha en los metadatos (por ejemplo, las que pasan por WhatsApp, que los borra), puedes ponerla al principio del nombre del archivo: `2023-05-12-nueva-york.jpg`. Las fotos sin ninguna fecha salen después, en el orden de su nombre de archivo (`foto-001`, `foto-002`…), que es el orden en que se enviaron.
 
 Para conservar los metadatos, sube los archivos originales (desde el ordenador, Google Drive, AirDrop o WhatsApp enviándolos **como documento**, no como foto).
 

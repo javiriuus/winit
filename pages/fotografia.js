@@ -12,29 +12,28 @@ export async function getStaticProps() {
   return { props: { photos: getPhotos() } };
 }
 
-function shuffle(list) {
-  const a = list.slice();
-  for (let i = a.length - 1; i > 0; i--) {
-    const j = Math.floor(Math.random() * (i + 1));
-    [a[i], a[j]] = [a[j], a[i]];
-  }
-  return a;
+// 4 columns on desktop, 3 on tablets, 2 on phones (matches the CSS breakpoints).
+function useColumns() {
+  const [cols, setCols] = useState(4);
+  useEffect(() => {
+    const pick = () => setCols(window.innerWidth <= 560 ? 2 : window.innerWidth <= 1100 ? 3 : 4);
+    pick();
+    window.addEventListener("resize", pick);
+    return () => window.removeEventListener("resize", pick);
+  }, []);
+  return cols;
 }
 
 export default function Photography({ photos }) {
   const { t } = useLang();
-  // Order is settled after hydration, so server and client render the same list first.
-  const [order, setOrder] = useState(photos);
-  const [ready, setReady] = useState(false);
+  const order = photos;
   const [open, setOpen] = useState(null);
+  const cols = useColumns();
 
-  // Dated photos keep their date order; undated ones are shuffled after them.
-  useEffect(() => {
-    const dated = photos.filter((p) => p.date);
-    const undated = photos.filter((p) => !p.date);
-    setOrder([...dated, ...shuffle(undated)]);
-    setReady(true);
-  }, [photos]);
+  // Masonry that reads left to right: photo i goes to column i % cols,
+  // so the first photos sit across the top row.
+  const columns = Array.from({ length: cols }, () => []);
+  order.forEach((p, i) => columns[i % cols].push({ ...p, i }));
 
   const close = useCallback(() => setOpen(null), []);
 
@@ -62,22 +61,31 @@ export default function Photography({ photos }) {
           </div>
           <p className="forum-intro">{t.photoIntro}</p>
 
-          <ul className="mosaic" data-ready={ready}>
-            {order.map((p, i) => (
-              <li key={p.src}>
-                <button type="button" className="mosaic-item" onClick={() => setOpen(i)} aria-label={t.photoOpen(i + 1)}>
-                  <Image
-                    src={p.src}
-                    width={p.w}
-                    height={p.h}
-                    alt=""
-                    sizes="(max-width: 560px) 50vw, (max-width: 1100px) 33vw, 25vw"
-                    loading={i < 8 ? "eager" : "lazy"}
-                  />
-                </button>
-              </li>
+          <div className="mosaic" style={{ "--cols": cols }}>
+            {columns.map((col, c) => (
+              <ul className="mosaic-col" key={c}>
+                {col.map((p) => (
+                  <li key={p.src}>
+                    <button
+                      type="button"
+                      className="mosaic-item"
+                      onClick={() => setOpen(p.i)}
+                      aria-label={t.photoOpen(p.i + 1)}
+                    >
+                      <Image
+                        src={p.src}
+                        width={p.w}
+                        height={p.h}
+                        alt=""
+                        sizes="(max-width: 560px) 50vw, (max-width: 1100px) 33vw, 25vw"
+                        loading={p.i < 8 ? "eager" : "lazy"}
+                      />
+                    </button>
+                  </li>
+                ))}
+              </ul>
             ))}
-          </ul>
+          </div>
         </section>
       </main>
       <Footer />
