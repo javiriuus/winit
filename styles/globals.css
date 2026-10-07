@@ -52,6 +52,7 @@
 html {
   scroll-behavior: smooth;
   background: var(--ink);
+  overscroll-behavior-y: none;
   -webkit-text-size-adjust: 100%;
 }
 @media (prefers-reduced-motion: reduce) {
@@ -228,8 +229,11 @@ img {
   grid-template-columns: 1fr auto 1fr;
   align-items: center;
   gap: 1rem;
-  padding: 1.1rem var(--gutter);
+  /* Reach under the phone's status bar / notch so nothing scrolls visibly above the header */
+  padding: calc(1.1rem + env(safe-area-inset-top, 0px)) calc(var(--gutter) + env(safe-area-inset-right, 0px)) 1.1rem
+    calc(var(--gutter) + env(safe-area-inset-left, 0px));
   border-bottom: 1px solid transparent;
+  transform: translateZ(0);
   color: var(--bone);
   transition: background-color 400ms var(--ease-out), border-color 400ms var(--ease-out);
 }
@@ -293,6 +297,16 @@ img {
 }
 
 @media (max-width: 760px) {
+  /* On phones the header is always solid: a transparent bar lets the page show
+     through above it while scrolling and while the browser bars collapse */
+  .site-header,
+  .site-header[data-solid="true"] {
+    background: rgba(11, 11, 10, 0.94);
+    -webkit-backdrop-filter: saturate(140%) blur(14px);
+    backdrop-filter: saturate(140%) blur(14px);
+    border-bottom-color: var(--rule);
+    transition: none;
+  }
   .site-header {
     grid-template-columns: 1fr auto auto;
   }

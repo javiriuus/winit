@@ -48,6 +48,8 @@ Two families, both self-hosted in `public/fonts` (OFL):
 
 ## Components
 
+- Header: fixed, padded by the safe-area insets so it covers the status bar/notch. Transparent over the hero on desktop until 60% of the viewport is scrolled; always solid (94% ink + blur) on phones.
+
 - Pill buttons in bone on ink (`.btn`, play chips), outlined pill for secondary controls (view toggle, player close).
 - Links: underline grows from the left on hover (`.link-line`).
 - Player: full-screen near-black overlay, 16:9 stage, Esc / close / backdrop to dismiss, focus trapped.
