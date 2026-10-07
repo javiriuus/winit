@@ -72,3 +72,38 @@ Edita textos en pages/index.js o conecta con Notion para CMS dinámico
 
 📧 javierllarena@gmail.com
 
+
+---
+
+## 📝 Publicar en el Foro
+
+Las publicaciones del foro son archivos de texto en `content/foro/`. Solo quien tiene acceso al repositorio puede publicar.
+
+Para crear una publicación nueva desde GitHub (también desde el móvil):
+
+1. Entra en el repositorio → carpeta `content/foro` → **Add file → Create new file**.
+2. Nombre del archivo: fecha + título corto, por ejemplo `2026-11-02-rodaje-jornada-laboral.md`.
+3. Escribe así:
+
+```
+---
+title: El título de la publicación
+date: 2026-11-02
+cover: /images/foro/mi-foto.jpg
+excerpt: Una o dos frases que salen en la lista del foro.
+---
+Primer párrafo del texto. Puedes usar **negrita**, *cursiva* y [enlaces](https://...).
+
+## Un subtítulo
+
+- Una lista
+- de cosas
+
+![Pie de foto](/images/foro/otra-foto.jpg)
+```
+
+4. Pulsa **Commit changes**. Vercel publica la web sola en uno o dos minutos.
+
+- `cover` y `excerpt` son opcionales.
+- Las fotos se suben a `public/images/foro/` (Add file → Upload files).
+- Versión en inglés (opcional): crea otro archivo con el mismo nombre terminado en `.en.md` (por ejemplo `2026-11-02-rodaje-jornada-laboral.en.md`) con su `title`, `excerpt` y texto. Si no existe, en inglés se muestra la versión en español.

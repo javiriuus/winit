@@ -42,6 +42,7 @@ Two families, both self-hosted in `public/fonts` (OFL):
 - Work gallery: one large frame per row in a single column (Samba-style reel), each video's own YouTube thumbnail, uncropped and unfiltered. Reel items are centered. Caption: title in the display face with the roles in `.meta` under it, position ("01 / 14") on the right. Vertical Shorts get a 9:16 frame at a narrower width; the player switches to 9:16 for them.
 - Work sheet (optional per work, e.g. the latest short): under the caption, a hairline, then synopsis (2/3) and festival selections in the display face (1/3), then the film stills in a 2-column 3:2 grid, same width as the frame.
 - About (Samba-style): wide 21:9 set photo, role heading in the display face with the statement beside it, then a 4:5 portrait photo next to the bio.
+- Forum (`/foro`, `/foro/[slug]`): posts are Markdown files in `content/foro` (optional `.en.md` twin). List: 5/7 cover + date, title in the display face, excerpt, "Leer →". Post: 64rem column, date, display title, 16:9 cover, 40rem body. Header is solid on these pages.
 - Services and contact: 5/7 split, intro sticky on desktop.
 - Images are frameless: no borders, radius or shadows.
 

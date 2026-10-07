@@ -1,31 +1,38 @@
 import { useEffect, useState } from "react";
+import { useRouter } from "next/router";
 import { useLang } from "../lib/i18n";
 
-export default function Header() {
+export default function Header({ alwaysSolid = false }) {
   const { lang, setLang, t } = useLang();
-  const [solid, setSolid] = useState(false);
+  const { pathname } = useRouter();
+  const [solid, setSolid] = useState(alwaysSolid);
+  const onForum = pathname.startsWith("/foro");
 
   useEffect(() => {
+    if (alwaysSolid) return;
     const onScroll = () => setSolid(window.scrollY > window.innerHeight * 0.6);
     onScroll();
     window.addEventListener("scroll", onScroll, { passive: true });
     return () => window.removeEventListener("scroll", onScroll);
-  }, []);
+  }, [alwaysSolid]);
 
   return (
     <header className="site-header" data-solid={solid}>
-      <a href="#top" className="wordmark" aria-label="Javier Llarena">
+      <a href="/" className="wordmark" aria-label="Javier Llarena">
         Javier Llarena
       </a>
 
       <nav className="site-nav" aria-label="Principal">
-        <a href="#work" className="link-line">
+        <a href="/#work" className="link-line">
           {t.navWork}
         </a>
-        <a href="#services" className="link-line">
+        <a href="/#services" className="link-line">
           {t.navServices}
         </a>
-        <a href="#contact" className="link-line nav-contact">
+        <a href="/foro" className="link-line nav-keep" aria-current={onForum ? "true" : undefined}>
+          {t.navForum}
+        </a>
+        <a href="/#contact" className="link-line nav-keep">
           {t.navContact}
         </a>
       </nav>
