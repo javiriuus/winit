@@ -43,11 +43,13 @@ Two families, both self-hosted in `public/fonts` (OFL):
 - Work sheet (optional per work, e.g. the latest short): under the caption, a hairline, then synopsis (2/3) and festival selections in the display face (1/3), then the film stills in a 2-column 3:2 grid, same width as the frame.
 - About (Samba-style): wide 21:9 set photo, role heading in the display face with the statement beside it, then a 4:5 portrait photo next to the bio.
 - Forum (`/foro`, `/foro/[slug]`): posts are Markdown files in `content/foro` (optional `.en.md` twin). List: 5/7 cover + date, title in the display face, excerpt, "Leer →". Post: 64rem column, date, display title, 16:9 cover, 40rem body. Header is solid on these pages.
+- Photography (`/fotografia`): every image in `public/fotografia` is listed at build time (sizes read from the file header), shuffled on each visit, shown as a 4/3/2-column masonry mosaic in original color; hovering dims the others. Click opens a lightbox (arrows, keys, swipe, Esc).
 - Services and contact: 5/7 split, intro sticky on desktop.
 - Images are frameless: no borders, radius or shadows.
 
 ## Components
 
+- Header: nav order Trabajo, Fotografía, Servicios, Foro, Contacto. On phones the nav collapses into a "Menú" pill that opens a full-screen list in the display face.
 - Header: fixed, padded by the safe-area insets so it covers the status bar/notch. Transparent over the hero on desktop until 60% of the viewport is scrolled; always opaque ink on phones (no blur, so iOS 26 Safari tints its floating address bar from it), with a pseudo-element extending the bar upward so no page shows above it.
 
 - Pill buttons in bone on ink (`.btn`, play chips), outlined pill for secondary controls (view toggle, player close).

@@ -44,3 +44,23 @@ export function CloseIcon({ size = 14 }) {
     </svg>
   );
 }
+
+export function ChevronIcon({ size = 16, dir = "right" }) {
+  return (
+    <svg
+      width={size}
+      height={size}
+      viewBox="0 0 24 24"
+      fill="none"
+      stroke="currentColor"
+      strokeWidth="1.8"
+      strokeLinecap="round"
+      strokeLinejoin="round"
+      aria-hidden="true"
+      focusable="false"
+      style={dir === "left" ? { transform: "scaleX(-1)" } : undefined}
+    >
+      <path d="M9 5l7 7-7 7" />
+    </svg>
+  );
+}

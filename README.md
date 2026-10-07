@@ -107,3 +107,15 @@ Primer párrafo del texto. Puedes usar **negrita**, *cursiva* y [enlaces](https:
 - `cover` y `excerpt` son opcionales.
 - Las fotos se suben a `public/images/foro/` (Add file → Upload files).
 - Versión en inglés (opcional): crea otro archivo con el mismo nombre terminado en `.en.md` (por ejemplo `2026-11-02-rodaje-jornada-laboral.en.md`) con su `title`, `excerpt` y texto. Si no existe, en inglés se muestra la versión en español.
+
+---
+
+## 📷 Añadir fotos a la página de Fotografía
+
+Todas las imágenes de la carpeta `public/fotografia` aparecen solas en javierllarenafilms.com/fotografia, en orden aleatorio cada vez que alguien entra.
+
+1. En GitHub, entra en `public/fotografia` → **Add file → Upload files**.
+2. Arrastra las fotos (.jpg, .png o .webp). Mejor si pesan menos de 2–3 MB cada una (unos 2000 px de lado largo es suficiente).
+3. Pulsa **Commit changes**. En uno o dos minutos ya están en la web.
+
+Para quitar una foto, ábrela en GitHub y bórrala (icono de la papelera).
