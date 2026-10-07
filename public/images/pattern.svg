@@ -1,23 +1,29 @@
-<svg xmlns="http://www.w3.org/2000/svg" width="1600" height="2000" viewBox="0 0 1600 2000">
-  <!-- Out-of-focus discs and thin lens rings: a quiet, soft pattern for the black ground. -->
+<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="1600" height="2000" viewBox="0 0 1600 2000" preserveAspectRatio="xMidYMin slice">
+  <!-- Out-of-focus discs and thin lens rings. The tile repeats vertically, so every
+       shape that crosses the top or bottom edge is drawn again one tile away (seamless). -->
   <defs>
     <radialGradient id="b" cx="50%" cy="50%" r="50%">
       <stop offset="0" stop-color="#ecebe6" stop-opacity="0.065"/>
       <stop offset="0.6" stop-color="#ecebe6" stop-opacity="0.032"/>
       <stop offset="1" stop-color="#ecebe6" stop-opacity="0"/>
     </radialGradient>
+    <g id="shapes">
+      <g fill="url(#b)">
+        <circle cx="1380" cy="260" r="300"/>
+        <circle cx="160" cy="900" r="230"/>
+        <circle cx="1240" cy="1450" r="180"/>
+        <circle cx="520" cy="1820" r="260"/>
+      </g>
+      <g fill="none" stroke="#ecebe6" stroke-opacity="0.085" stroke-width="1">
+        <circle cx="1380" cy="260" r="420"/>
+        <circle cx="1380" cy="260" r="470"/>
+        <circle cx="160" cy="900" r="330"/>
+        <circle cx="520" cy="1820" r="380"/>
+        <circle cx="1240" cy="1450" r="260"/>
+      </g>
+    </g>
   </defs>
-  <g fill="url(#b)">
-    <circle cx="1380" cy="260" r="300"/>
-    <circle cx="160" cy="900" r="230"/>
-    <circle cx="1240" cy="1450" r="180"/>
-    <circle cx="520" cy="1820" r="260"/>
-  </g>
-  <g fill="none" stroke="#ecebe6" stroke-opacity="0.085" stroke-width="1">
-    <circle cx="1380" cy="260" r="420"/>
-    <circle cx="1380" cy="260" r="470"/>
-    <circle cx="160" cy="900" r="330"/>
-    <circle cx="520" cy="1820" r="380"/>
-    <circle cx="1240" cy="1450" r="260"/>
-  </g>
+  <use xlink:href="#shapes" href="#shapes"/>
+  <use xlink:href="#shapes" href="#shapes" y="-2000"/>
+  <use xlink:href="#shapes" href="#shapes" y="2000"/>
 </svg>

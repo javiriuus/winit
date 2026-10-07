@@ -64,7 +64,7 @@ body {
   margin: 0;
   /* Projection-room black: a faint warm falloff from the top, so the black has depth */
   background:
-    url("/images/pattern.svg") center top / 1600px auto repeat-y,
+    url("/images/pattern.svg") center top / max(100%, 1600px) auto repeat-y,
     radial-gradient(120% 60% at 50% 0%, rgba(236, 235, 230, 0.035) 0%, rgba(236, 235, 230, 0) 60%),
     var(--ink);
   color: var(--bone);
@@ -78,39 +78,16 @@ body {
   font-feature-settings: "ss01" on;
 }
 
-/* ---------- Filmic display type: grain inside the letters + soft halation ---------- */
-.hero-name .line > span,
+/* ---------- Filmic display type: solid letters, grainy diffused edges ---------- */
+/* The filter lives in components/FilmicDefs.js */
+.hero-name,
 .section-title,
 .about-role,
 .contact-title,
 .work-title,
 .work-row-title,
 .work-selections li {
-  color: var(--bone);
-}
-@supports ((-webkit-background-clip: text) or (background-clip: text)) {
-  .hero-name .line > span,
-  .section-title,
-  .about-role,
-  .contact-title,
-  .work-title,
-  .work-row-title,
-  .work-selections li {
-    background:
-      url("/images/grain-ink.png") 0 0 / 180px 180px,
-      linear-gradient(var(--bone), var(--bone));
-    -webkit-background-clip: text;
-    background-clip: text;
-    -webkit-text-fill-color: transparent;
-    color: transparent;
-    /* Diffusion: a tight bloom and a wide, faint one, like a mist filter on the lens */
-    filter: drop-shadow(0 0 0.05em rgba(236, 235, 230, 0.32)) drop-shadow(0 0 0.32em rgba(236, 235, 230, 0.1));
-  }
-  /* Over photos the name also needs a dark lift */
-  .hero-name .line > span {
-    filter: drop-shadow(0 0 0.05em rgba(236, 235, 230, 0.3)) drop-shadow(0 0 0.3em rgba(236, 235, 230, 0.1))
-      drop-shadow(0 2px 20px rgba(0, 0, 0, 0.45));
-  }
+  filter: url(#filmic);
 }
 
 /* ---------- Film grain + vignette over the whole page ---------- */
@@ -387,16 +364,15 @@ img {
   font-size: clamp(4rem, 14vw, 15rem);
   line-height: 0.86;
   letter-spacing: -0.02em;
+  text-shadow: 0 2px 24px rgba(0, 0, 0, 0.35);
   text-wrap: balance;
 }
 .hero-name .line {
   display: block;
   overflow: hidden;
-  /* the span carries the room for descenders (its padding is painted with the letter fill) */
-  margin-bottom: -0.2em;
-}
-.hero-name .line > span {
-  padding: 0.04em 0.06em 0.2em 0;
+  /* room for the J's descender inside the reveal mask */
+  padding-bottom: 0.22em;
+  margin-bottom: -0.18em;
 }
 .hero-name .line > span {
   display: block;
@@ -1367,21 +1343,4 @@ img {
   .hero-frame[data-active="true"] img {
     transform: none;
   }
-}
-
-/* Filmic titles paint their fill as a background clipped to the glyphs, so the box
-   must reach accents and descenders (line-height < 1). Pad it, then cancel the shift. */
-.section-title,
-.about-role,
-.work-title,
-.work-row-title,
-.work-selections li {
-  padding: 0.12em 0.04em 0.2em 0;
-  margin-top: -0.12em;
-  margin-bottom: -0.2em;
-}
-.contact-title {
-  padding: 0.12em 0.04em 0.2em 0;
-  margin-top: -0.12em;
-  margin-bottom: calc(clamp(2.5rem, 5vw, 4.5rem) - 0.2em);
 }

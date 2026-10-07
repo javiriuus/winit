@@ -9,6 +9,7 @@ import OnSet from "../components/OnSet";
 import Contact from "../components/Contact";
 import Footer from "../components/Footer";
 import Player from "../components/Player";
+import FilmicDefs from "../components/FilmicDefs";
 import { useLang } from "../lib/i18n";
 import { featuredOf } from "../lib/content";
 import { resolveWorks } from "../lib/resolve-works";
@@ -40,6 +41,7 @@ export default function Home({ works }) {
         <meta name="twitter:card" content="summary_large_image" />
       </Head>
 
+      <FilmicDefs />
       <a className="skip" href="#work">
         {t.skip}
       </a>

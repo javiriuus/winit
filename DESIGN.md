@@ -15,7 +15,7 @@ Production-company register in the line of A24 and Samba Films: near-black groun
 | `--rule` | `rgba(236,235,230,.16)` | Hairline section and list rules |
 | `--rule-strong` | `rgba(236,235,230,.4)` | Input underlines, outlined controls |
 
-Ground pattern: soft out-of-focus discs and thin lens rings (`public/images/pattern.svg`, tiled vertically, scrolls with the page). Ground texture: a fixed film-grain layer (`public/images/grain.png`, 7.5% opacity, jittered in 6 steps like projected film, static with reduced motion), a soft edge vignette, and a faint light falloff from the top of the page. The player sits above the grain so videos play clean.
+Ground pattern: soft out-of-focus discs and thin lens rings (`public/images/pattern.svg`, scaled to the full viewport width, seamless vertical repeat, scrolls with the page). Ground texture: a fixed film-grain layer (`public/images/grain.png`, 7.5% opacity, jittered in 6 steps like projected film, static with reduced motion), a soft edge vignette, and a faint light falloff from the top of the page. The player sits above the grain so videos play clean.
 
 No accent color. Behind-the-scenes photography is shown in black and white; film stills inside a work's sheet keep their own color. Form errors use `#e4826f`.
 
@@ -24,7 +24,7 @@ No accent color. Behind-the-scenes photography is shown in black and white; film
 Two families, both self-hosted in `public/fonts` (OFL):
 
 - **Noto Serif Display**, cut at 80% width (weights 200–400), for large display type only: hero name, section titles, contact title, list-view work titles. Weights 360–380 (lighter loses legibility over photos), never below ~2rem, never italic.
-- Filmic treatment on every display-face title: the bone fill is a background clipped to the glyphs with a dark grain tile (`public/images/grain-ink.png`) over it, plus a two-step bloom (`drop-shadow`) like a mist filter. The box is padded so accents and descenders keep their fill.
+- Filmic treatment on every display-face title: an SVG filter (`components/FilmicDefs.js`, `filter: url(#filmic)`) keeps the letters solid but roughens their edges with fine noise (displacement 2.4px), softens them slightly, and adds a tight halo plus a wide faint bloom, like type shot through a diffusion filter. No holes inside the letters.
 - **Schibsted Grotesk** (variable 400–900) for everything else, kept light: 400 for running text, 500 for titles and labels.
 
 - Name in hero: 380, soft text-shadow, `clamp(4rem, 14vw, 15rem)`, line-height .86, tracking -0.03em (23vw on mobile).
