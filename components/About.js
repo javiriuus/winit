@@ -3,7 +3,7 @@ import { useLang } from "../lib/i18n";
 // Samba-style about: a wide set photo, the role as a large heading with the
 // statement, then a portrait photo beside the bio.
 const WIDE = { src: "/images/f37777664.jpg", pos: "50% 40%" };
-const PORTRAIT = { src: "/images/000032.JPG", pos: "60% 35%" };
+const PORTRAIT = { src: "/images/javier-gimbal.jpg", pos: "67% 30%" };
 
 export default function About() {
   const { t } = useLang();
