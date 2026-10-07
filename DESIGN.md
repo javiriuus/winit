@@ -48,7 +48,7 @@ Two families, both self-hosted in `public/fonts` (OFL):
 
 ## Components
 
-- Header: fixed, padded by the safe-area insets so it covers the status bar/notch. Transparent over the hero on desktop until 60% of the viewport is scrolled; always solid (94% ink + blur) on phones.
+- Header: fixed, padded by the safe-area insets so it covers the status bar/notch. Transparent over the hero on desktop until 60% of the viewport is scrolled; always opaque ink on phones (no blur, so iOS 26 Safari tints its floating address bar from it), with a pseudo-element extending the bar upward so no page shows above it.
 
 - Pill buttons in bone on ink (`.btn`, play chips), outlined pill for secondary controls (view toggle, player close).
 - Links: underline grows from the left on hover (`.link-line`).
