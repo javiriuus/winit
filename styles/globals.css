@@ -64,6 +64,7 @@ body {
   margin: 0;
   /* Projection-room black: a faint warm falloff from the top, so the black has depth */
   background:
+    url("/images/pattern.svg") center top / 1600px auto repeat-y,
     radial-gradient(120% 60% at 50% 0%, rgba(236, 235, 230, 0.035) 0%, rgba(236, 235, 230, 0) 60%),
     var(--ink);
   color: var(--bone);
@@ -75,6 +76,41 @@ body {
   -moz-osx-font-smoothing: grayscale;
   text-rendering: optimizeLegibility;
   font-feature-settings: "ss01" on;
+}
+
+/* ---------- Filmic display type: grain inside the letters + soft halation ---------- */
+.hero-name .line > span,
+.section-title,
+.about-role,
+.contact-title,
+.work-title,
+.work-row-title,
+.work-selections li {
+  color: var(--bone);
+}
+@supports ((-webkit-background-clip: text) or (background-clip: text)) {
+  .hero-name .line > span,
+  .section-title,
+  .about-role,
+  .contact-title,
+  .work-title,
+  .work-row-title,
+  .work-selections li {
+    background:
+      url("/images/grain-ink.png") 0 0 / 180px 180px,
+      linear-gradient(var(--bone), var(--bone));
+    -webkit-background-clip: text;
+    background-clip: text;
+    -webkit-text-fill-color: transparent;
+    color: transparent;
+    /* Diffusion: a tight bloom and a wide, faint one, like a mist filter on the lens */
+    filter: drop-shadow(0 0 0.05em rgba(236, 235, 230, 0.32)) drop-shadow(0 0 0.32em rgba(236, 235, 230, 0.1));
+  }
+  /* Over photos the name also needs a dark lift */
+  .hero-name .line > span {
+    filter: drop-shadow(0 0 0.05em rgba(236, 235, 230, 0.3)) drop-shadow(0 0 0.3em rgba(236, 235, 230, 0.1))
+      drop-shadow(0 2px 20px rgba(0, 0, 0, 0.45));
+  }
 }
 
 /* ---------- Film grain + vignette over the whole page ---------- */
@@ -351,15 +387,16 @@ img {
   font-size: clamp(4rem, 14vw, 15rem);
   line-height: 0.86;
   letter-spacing: -0.02em;
-  text-shadow: 0 2px 24px rgba(0, 0, 0, 0.35);
   text-wrap: balance;
 }
 .hero-name .line {
   display: block;
   overflow: hidden;
-  /* room for the J's descender inside the reveal mask */
-  padding-bottom: 0.22em;
-  margin-bottom: -0.18em;
+  /* the span carries the room for descenders (its padding is painted with the letter fill) */
+  margin-bottom: -0.2em;
+}
+.hero-name .line > span {
+  padding: 0.04em 0.06em 0.2em 0;
 }
 .hero-name .line > span {
   display: block;
@@ -789,18 +826,18 @@ img {
   font-size: clamp(2.1rem, 5.6vw, 5.5rem);
   line-height: 1;
   letter-spacing: -0.01em;
-  transition: color 300ms var(--ease-out), transform 400ms var(--ease-out);
+  transition: opacity 300ms var(--ease-out), transform 400ms var(--ease-out);
 }
 .work-row .arrow {
   color: var(--bone-faint);
   transition: color 300ms var(--ease-out), transform 400ms var(--ease-out);
 }
 .work-list:hover .work-row-title {
-  color: var(--bone-faint);
+  opacity: 0.42;
 }
 .work-list .work-row:hover .work-row-title,
 .work-list .work-row:focus-visible .work-row-title {
-  color: var(--bone);
+  opacity: 1;
   transform: translateX(0.4rem);
 }
 .work-list .work-row:hover .arrow {
@@ -809,7 +846,7 @@ img {
 }
 @media (hover: none) {
   .work-list:hover .work-row-title {
-    color: var(--bone);
+    opacity: 1;
   }
 }
 
@@ -864,23 +901,61 @@ img {
 
 /* ---------- Services ---------- */
 /* ---------- About ---------- */
-.about-statement {
+.about {
+  display: grid;
+  gap: clamp(2.5rem, 5vw, 4.5rem);
+}
+.about figure {
   margin: 0;
-  max-width: 18ch;
+  overflow: hidden;
+  background: var(--ink-2);
+}
+.about img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  filter: grayscale(1) contrast(1.04);
+}
+.about-wide {
+  aspect-ratio: 21 / 9;
+}
+.about-head {
+  display: grid;
+  grid-template-columns: minmax(0, 7fr) minmax(0, 5fr);
+  align-items: end;
+  gap: 1.5rem clamp(2rem, 5vw, 5rem);
+}
+.about-role {
+  margin: 0;
   font-family: var(--font-display);
   font-weight: 360;
-  font-size: clamp(2.6rem, 6.4vw, 6.75rem);
-  line-height: 0.98;
+  font-size: clamp(2.8rem, 7vw, 7.25rem);
+  line-height: 0.92;
   letter-spacing: -0.02em;
   text-wrap: balance;
+}
+.about-statement {
+  margin: 0;
+  max-width: 30ch;
+  color: var(--bone-dim);
+  font-size: clamp(1.15rem, 1.6vw, 1.45rem);
+  line-height: 1.4;
+}
+.about-split {
+  display: grid;
+  grid-template-columns: minmax(0, 5fr) minmax(0, 7fr);
+  align-items: start;
+  gap: clamp(2rem, 6vw, 6rem);
+  padding-top: clamp(1.5rem, 3vw, 2.5rem);
+  border-top: 1px solid var(--rule);
+}
+.about-portrait {
+  aspect-ratio: 4 / 5;
 }
 .about-body {
   display: grid;
   gap: 1.25rem;
   max-width: 40rem;
-  margin: clamp(2.5rem, 5vw, 4.5rem) 0 0 auto;
-  padding-top: clamp(1.5rem, 3vw, 2.5rem);
-  border-top: 1px solid var(--rule);
 }
 .about-body p {
   margin: 0;
@@ -890,10 +965,19 @@ img {
 }
 .about-body p:first-child {
   color: var(--bone);
+  font-size: clamp(1.2rem, 1.7vw, 1.5rem);
+  line-height: 1.45;
 }
 @media (max-width: 760px) {
-  .about-body {
-    margin-left: 0;
+  .about-wide {
+    aspect-ratio: 4 / 3;
+  }
+  .about-head,
+  .about-split {
+    grid-template-columns: 1fr;
+  }
+  .about-portrait {
+    max-width: 24rem;
   }
 }
 
@@ -1283,4 +1367,21 @@ img {
   .hero-frame[data-active="true"] img {
     transform: none;
   }
+}
+
+/* Filmic titles paint their fill as a background clipped to the glyphs, so the box
+   must reach accents and descenders (line-height < 1). Pad it, then cancel the shift. */
+.section-title,
+.about-role,
+.work-title,
+.work-row-title,
+.work-selections li {
+  padding: 0.12em 0.04em 0.2em 0;
+  margin-top: -0.12em;
+  margin-bottom: -0.2em;
+}
+.contact-title {
+  padding: 0.12em 0.04em 0.2em 0;
+  margin-top: -0.12em;
+  margin-bottom: calc(clamp(2.5rem, 5vw, 4.5rem) - 0.2em);
 }

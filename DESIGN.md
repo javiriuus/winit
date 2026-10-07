@@ -15,7 +15,7 @@ Production-company register in the line of A24 and Samba Films: near-black groun
 | `--rule` | `rgba(236,235,230,.16)` | Hairline section and list rules |
 | `--rule-strong` | `rgba(236,235,230,.4)` | Input underlines, outlined controls |
 
-Ground texture: a fixed film-grain layer (`public/images/grain.png`, 7.5% opacity, jittered in 6 steps like projected film, static with reduced motion), a soft edge vignette, and a faint light falloff from the top of the page. The player sits above the grain so videos play clean.
+Ground pattern: soft out-of-focus discs and thin lens rings (`public/images/pattern.svg`, tiled vertically, scrolls with the page). Ground texture: a fixed film-grain layer (`public/images/grain.png`, 7.5% opacity, jittered in 6 steps like projected film, static with reduced motion), a soft edge vignette, and a faint light falloff from the top of the page. The player sits above the grain so videos play clean.
 
 No accent color. Behind-the-scenes photography is shown in black and white; film stills inside a work's sheet keep their own color. Form errors use `#e4826f`.
 
@@ -24,6 +24,7 @@ No accent color. Behind-the-scenes photography is shown in black and white; film
 Two families, both self-hosted in `public/fonts` (OFL):
 
 - **Noto Serif Display**, cut at 80% width (weights 200–400), for large display type only: hero name, section titles, contact title, list-view work titles. Weights 360–380 (lighter loses legibility over photos), never below ~2rem, never italic.
+- Filmic treatment on every display-face title: the bone fill is a background clipped to the glyphs with a dark grain tile (`public/images/grain-ink.png`) over it, plus a two-step bloom (`drop-shadow`) like a mist filter. The box is padded so accents and descenders keep their fill.
 - **Schibsted Grotesk** (variable 400–900) for everything else, kept light: 400 for running text, 500 for titles and labels.
 
 - Name in hero: 380, soft text-shadow, `clamp(4rem, 14vw, 15rem)`, line-height .86, tracking -0.03em (23vw on mobile).
@@ -40,6 +41,7 @@ Two families, both self-hosted in `public/fonts` (OFL):
 - Section head: title left, controls right, hairline below.
 - Work gallery: one large frame per row in a single column (Samba-style reel), each video's own YouTube thumbnail, uncropped and unfiltered. Reel items are centered. Caption: title in the display face with the roles in `.meta` under it, position ("01 / 14") on the right. Vertical Shorts get a 9:16 frame at a narrower width; the player switches to 9:16 for them.
 - Work sheet (optional per work, e.g. the latest short): under the caption, a hairline, then synopsis (2/3) and festival selections in the display face (1/3), then the film stills in a 2-column 3:2 grid, same width as the frame.
+- About (Samba-style): wide 21:9 set photo, role heading in the display face with the statement beside it, then a 4:5 portrait photo next to the bio.
 - Services and contact: 5/7 split, intro sticky on desktop.
 - Images are frameless: no borders, radius or shadows.
 
