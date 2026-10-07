@@ -33,7 +33,11 @@ export default function Home({ works }) {
         <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
         <meta name="theme-color" content="#0b0b0a" />
         <meta property="og:title" content="Javier Llarena — Director" />
-        <meta property="og:image" content="/images/000026.JPG" />
+        <link rel="canonical" href="https://javierllarenafilms.com/" />
+        <meta property="og:url" content="https://javierllarenafilms.com/" />
+        <meta property="og:type" content="website" />
+        <meta property="og:image" content="https://javierllarenafilms.com/images/000026.JPG" />
+        <meta name="twitter:card" content="summary_large_image" />
       </Head>
 
       <a className="skip" href="#work">

@@ -15,6 +15,8 @@ Production-company register in the line of A24 and Samba Films: near-black groun
 | `--rule` | `rgba(236,235,230,.16)` | Hairline section and list rules |
 | `--rule-strong` | `rgba(236,235,230,.4)` | Input underlines, outlined controls |
 
+Ground texture: a fixed film-grain layer (`public/images/grain.png`, 7.5% opacity, jittered in 6 steps like projected film, static with reduced motion), a soft edge vignette, and a faint light falloff from the top of the page. The player sits above the grain so videos play clean.
+
 No accent color. Behind-the-scenes photography is shown in black and white; film stills inside a work's sheet keep their own color. Form errors use `#e4826f`.
 
 ## Type

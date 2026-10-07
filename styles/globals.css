@@ -62,7 +62,10 @@ html {
 
 body {
   margin: 0;
-  background: var(--ink);
+  /* Projection-room black: a faint warm falloff from the top, so the black has depth */
+  background:
+    radial-gradient(120% 60% at 50% 0%, rgba(236, 235, 230, 0.035) 0%, rgba(236, 235, 230, 0) 60%),
+    var(--ink);
   color: var(--bone);
   font-family: var(--font);
   font-size: 1rem;
@@ -72,6 +75,42 @@ body {
   -moz-osx-font-smoothing: grayscale;
   text-rendering: optimizeLegibility;
   font-feature-settings: "ss01" on;
+}
+
+/* ---------- Film grain + vignette over the whole page ---------- */
+body::before,
+body::after {
+  content: "";
+  position: fixed;
+  pointer-events: none;
+  z-index: 90;
+}
+/* Grain: a tiled noise frame, jittered in steps like projected film */
+body::before {
+  inset: -50%;
+  background-image: url("/images/grain.png");
+  background-size: 200px 200px;
+  opacity: 0.075;
+  animation: grain 0.9s steps(6) infinite;
+}
+/* Vignette: edges fall off into black, centre stays clean */
+body::after {
+  inset: 0;
+  background: radial-gradient(ellipse 120% 100% at 50% 50%, rgba(0, 0, 0, 0) 55%, rgba(0, 0, 0, 0.42) 100%);
+}
+@keyframes grain {
+  0% { transform: translate(0, 0); }
+  17% { transform: translate(-7%, 4%); }
+  33% { transform: translate(5%, -9%); }
+  50% { transform: translate(-3%, 11%); }
+  67% { transform: translate(9%, 2%); }
+  83% { transform: translate(-10%, -5%); }
+  100% { transform: translate(3%, 6%); }
+}
+@media (prefers-reduced-motion: reduce) {
+  body::before {
+    animation: none;
+  }
 }
 
 ::selection {
@@ -1140,7 +1179,7 @@ img {
 .player {
   position: fixed;
   inset: 0;
-  z-index: 60;
+  z-index: 95; /* above the grain, so videos play clean */
   display: grid;
   place-items: center;
   padding: clamp(1rem, 4vw, 4rem);
