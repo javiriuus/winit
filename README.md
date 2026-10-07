@@ -112,7 +112,11 @@ Primer párrafo del texto. Puedes usar **negrita**, *cursiva* y [enlaces](https:
 
 ## 📷 Añadir fotos a la página de Fotografía
 
-Todas las imágenes de la carpeta `public/fotografia` aparecen solas en javierllarenafilms.com/fotografia, en orden aleatorio cada vez que alguien entra.
+Todas las imágenes de la carpeta `public/fotografia` aparecen solas en javierllarenafilms.com/fotografia.
+
+**Orden:** por la fecha en que se hizo la foto (de la más reciente a la más antigua), leída de los metadatos EXIF del archivo. Si una foto no tiene fecha en los metadatos (por ejemplo, las que pasan por WhatsApp, que los borra), puedes ponerla al principio del nombre del archivo: `2023-05-12-nueva-york.jpg`. Las fotos sin ninguna fecha salen al final en orden aleatorio.
+
+Para conservar los metadatos, sube los archivos originales (desde el ordenador, Google Drive, AirDrop o WhatsApp enviándolos **como documento**, no como foto).
 
 1. En GitHub, entra en `public/fotografia` → **Add file → Upload files**.
 2. Arrastra las fotos (.jpg, .png o .webp). Mejor si pesan menos de 2–3 MB cada una (unos 2000 px de lado largo es suficiente).

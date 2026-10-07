@@ -23,13 +23,16 @@ function shuffle(list) {
 
 export default function Photography({ photos }) {
   const { t } = useLang();
-  // New random order on every visit (after hydration, so server and client agree first).
+  // Order is settled after hydration, so server and client render the same list first.
   const [order, setOrder] = useState(photos);
   const [ready, setReady] = useState(false);
   const [open, setOpen] = useState(null);
 
+  // Dated photos keep their date order; undated ones are shuffled after them.
   useEffect(() => {
-    setOrder(shuffle(photos));
+    const dated = photos.filter((p) => p.date);
+    const undated = photos.filter((p) => !p.date);
+    setOrder([...dated, ...shuffle(undated)]);
     setReady(true);
   }, [photos]);
 
