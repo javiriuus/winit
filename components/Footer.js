@@ -6,6 +6,7 @@ export default function Footer() {
 
   return (
     <footer className="site-footer">
+      <img src="/brand/jlf-logo.png" alt="JLF Creative Studio" width="643" height="410" className="footer-logo" />
       <span className="meta">
         © {new Date().getFullYear()} Javier Llarena. {t.rights}
       </span>

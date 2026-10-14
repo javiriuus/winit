@@ -54,8 +54,9 @@ export default function Header({ alwaysSolid = false }) {
 
   return (
     <header className="site-header" data-solid={solid}>
-      <a href="/" className="wordmark" aria-label="Javier Llarena">
-        Javier Llarena
+      <a href="/" className="wordmark" aria-label="Javier Llarena — JLF Creative Studio">
+        <img src="/brand/jlf-mark.png" alt="" width="643" height="410" className="wordmark-mark" />
+        <span className="wordmark-name">Javier Llarena</span>
       </a>
 
       <nav className="site-nav" aria-label="Principal">

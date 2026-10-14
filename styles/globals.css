@@ -251,6 +251,20 @@ img {
   letter-spacing: 0.22em;
   text-transform: uppercase;
   white-space: nowrap;
+  display: inline-flex;
+  align-items: center;
+  gap: 0.85rem;
+}
+.wordmark-mark {
+  display: block;
+  height: 1.75rem;
+  width: auto;
+}
+.footer-logo {
+  display: block;
+  width: 6.5rem;
+  height: auto;
+  opacity: 0.9;
 }
 .site-nav {
   display: flex;
@@ -329,6 +343,12 @@ img {
   }
   .wordmark {
     font-size: 0.85rem;
+  }
+  .wordmark-name {
+    display: none;
+  }
+  .wordmark-mark {
+    height: 1.9rem;
   }
 }
 

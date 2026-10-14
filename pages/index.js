@@ -39,6 +39,30 @@ export default function Home({ works }) {
         <meta property="og:type" content="website" />
         <meta property="og:image" content="https://javierllarenafilms.com/images/000026.JPG" />
         <meta name="twitter:card" content="summary_large_image" />
+        <meta property="og:site_name" content="Javier Llarena" />
+        <script
+          type="application/ld+json"
+          // Site name and logo for Google's results (name next to the favicon).
+          dangerouslySetInnerHTML={{
+            __html: JSON.stringify([
+              {
+                "@context": "https://schema.org",
+                "@type": "WebSite",
+                name: "Javier Llarena",
+                alternateName: ["JLF Creative Studio", "Javier Llarena Films"],
+                url: "https://javierllarenafilms.com/",
+              },
+              {
+                "@context": "https://schema.org",
+                "@type": "Organization",
+                name: "JLF Creative Studio",
+                url: "https://javierllarenafilms.com/",
+                logo: "https://javierllarenafilms.com/icon-512.png",
+                founder: { "@type": "Person", name: "Javier Llarena" },
+              },
+            ]),
+          }}
+        />
       </Head>
 
       <FilmicDefs />

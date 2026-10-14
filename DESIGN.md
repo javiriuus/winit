@@ -47,6 +47,12 @@ Two families, both self-hosted in `public/fonts` (OFL):
 - Services and contact: 5/7 split, intro sticky on desktop.
 - Images are frameless: no borders, radius or shadows.
 
+## Brand
+
+- Logo "JLF / Creative Studio", white on transparent: `public/brand/jlf-logo.png` (full) and `public/brand/jlf-mark.png` (JLF only).
+- Header: JLF mark (1.75rem tall) + "Javier Llarena" wordmark; on phones the mark alone. Footer: full logo, 6.5rem wide.
+- Favicons: the JLF mark centered on an ink square (`favicon.ico` 16/32/48, `icon-48/96/192/512.png`, `apple-touch-icon.png`, `site.webmanifest`). The home page carries WebSite + Organization JSON-LD (site name and logo for Google).
+
 ## Components
 
 - Header: nav order Trabajo, Fotografía, Servicios, Foro, Contacto. On phones the nav collapses into a "Menú" pill that opens a full-screen list in the display face.
