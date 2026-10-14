@@ -1,8 +1,10 @@
+import { useCallback, useState } from "react";
 import Head from "next/head";
 import Header from "../../components/Header";
 import Footer from "../../components/Footer";
 import FilmicDefs from "../../components/FilmicDefs";
 import PostDate from "../../components/PostDate";
+import Lightbox from "../../components/Lightbox";
 import { useLang } from "../../lib/i18n";
 import { getAllPosts, getPost } from "../../lib/posts";
 
@@ -18,6 +20,20 @@ export default function Post({ post }) {
   const { lang, t } = useLang();
   const v = (lang === "en" && post.en) || post.es;
   const fellBack = lang === "en" && !post.en;
+  const [photos, setPhotos] = useState([]);
+  const [open, setOpen] = useState(null);
+  const close = useCallback(() => setOpen(null), []);
+
+  // Any photo in the body opens the lightbox, with every body photo in order.
+  const onBodyClick = (e) => {
+    const img = e.target.closest("img");
+    if (!img) return;
+    const imgs = [...e.currentTarget.querySelectorAll("img[width][height]")];
+    const i = imgs.indexOf(img);
+    if (i < 0) return;
+    setPhotos(imgs.map((el) => ({ src: el.getAttribute("src"), w: +el.getAttribute("width"), h: +el.getAttribute("height") })));
+    setOpen(i);
+  };
 
   return (
     <>
@@ -49,13 +65,14 @@ export default function Post({ post }) {
             </figure>
           )}
           {fellBack && <p className="meta post-note">{t.onlySpanish}</p>}
-          <div className="post-body" dangerouslySetInnerHTML={{ __html: v.html }} />
+          <div className="post-body" onClick={onBodyClick} dangerouslySetInnerHTML={{ __html: v.html }} />
           <a href="/foro" className="meta post-back post-back-end link-line">
             ← {t.backToForum}
           </a>
         </article>
       </main>
       <Footer />
+      <Lightbox photos={photos} index={open} onIndex={setOpen} onClose={close} />
     </>
   );
 }

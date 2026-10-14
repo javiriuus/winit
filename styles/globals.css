@@ -1513,13 +1513,32 @@ img {
   margin: 0 0 1.5rem;
 }
 .post-body {
-  max-width: 40rem;
   font-size: clamp(1.08rem, 1.3vw, 1.2rem);
   line-height: 1.7;
   color: var(--bone);
 }
 .post-body > * {
   margin: 0 0 1.4em;
+  max-width: 40rem;
+}
+/* Photo grids use the full post column (64rem). */
+.post-body > .post-gallery {
+  max-width: none;
+  display: grid;
+  grid-template-columns: repeat(var(--cols, 2), minmax(0, 1fr));
+  gap: clamp(0.4rem, 0.8vw, 0.75rem);
+  margin: 2.4em 0;
+}
+.post-gallery figure {
+  margin: 0;
+}
+.post-gallery img {
+  display: block;
+  width: 100%;
+  height: auto;
+}
+.post-body img[width] {
+  cursor: zoom-in;
 }
 .post-body h2,
 .post-body h3,
@@ -1556,8 +1575,9 @@ img {
   color: var(--bone-dim);
   font-style: italic;
 }
-.post-body figure {
+.post-body > figure {
   margin: 2.2em 0;
+  max-width: none;
 }
 .post-body figure img {
   width: 100%;

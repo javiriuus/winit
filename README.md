@@ -106,6 +106,7 @@ Primer párrafo del texto. Puedes usar **negrita**, *cursiva* y [enlaces](https:
 
 - `cover` y `excerpt` son opcionales.
 - Las fotos se suben a `public/images/foro/` (Add file → Upload files).
+- Galería: varias fotos en líneas seguidas (sin línea en blanco entre ellas) se muestran en cuadrícula, a 2 columnas (o 3 si son exactamente 3 fotos). Cualquier foto se abre a pantalla completa al pulsarla.
 - Versión en inglés (opcional): crea otro archivo con el mismo nombre terminado en `.en.md` (por ejemplo `2026-11-02-rodaje-jornada-laboral.en.md`) con su `title`, `excerpt` y texto. Si no existe, en inglés se muestra la versión en español.
 
 ---
