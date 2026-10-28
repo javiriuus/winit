@@ -53,11 +53,14 @@ Two families, both self-hosted in `public/fonts` (OFL):
 - Header: JLF mark (1.75rem tall) + "Javier Llarena" wordmark; on phones the mark alone. Footer: full logo, 6.5rem wide.
 - Favicons: the JLF mark centered on an ink square (`favicon.ico` 16/32/48, `icon-48/96/192/512.png`, `apple-touch-icon.png`, `site.webmanifest`). The home page carries WebSite + Organization JSON-LD (site name and logo for Google).
 
+- Work page (`/trabajo/<slug>`, `/en/trabajo/<slug>`): 80rem column; back link, title in the display face (up to 7rem) with "Mi papel" + roles, the video frame (16:9, or 9:16 at 26rem for Shorts) that plays in place, the work sheet (synopsis, selections, stills that open the lightbox), a "¿Tienes un proyecto parecido?" call to action with the pill button, and previous/next titles in the display face. Every reel item on the home links to its page ("Ver ficha →", centered meta link).
+
 ## Components
 
 - Header: nav order Trabajo, Fotografía, Servicios, Foro, Contacto. On phones the nav collapses into a "Menú" pill that opens a full-screen list in the display face.
 - Header: fixed, padded by the safe-area insets so it covers the status bar/notch. Transparent over the hero on desktop until 60% of the viewport is scrolled; always opaque ink on phones (no blur, so iOS 26 Safari tints its floating address bar from it), with a pseudo-element extending the bar upward so no page shows above it.
 
+- Contact form: name, email, project type and budget (selects styled as the underlined inputs, with a drawn chevron), approximate dates, message. Optional fields carry a lowercase "(opcional)" in the faint tone.
 - Pill buttons in bone on ink (`.btn`, play chips), outlined pill for secondary controls (view toggle, player close).
 - Links: underline grows from the left on hover (`.link-line`).
 - Player: full-screen near-black overlay, 16:9 stage, Esc / close / backdrop to dismiss, focus trapped.

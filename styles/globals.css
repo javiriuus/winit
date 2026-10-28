@@ -90,6 +90,9 @@ body {
 .work-selections li,
 .post-title,
 .post-card-title,
+.work-page-title,
+.work-cta-title,
+.work-pager-title,
 .mobile-menu a {
   filter: url(#filmic);
 }
@@ -1171,7 +1174,8 @@ img {
   color: var(--bone-dim);
 }
 .field input,
-.field textarea {
+.field textarea,
+.field select {
   width: 100%;
   font: inherit;
   font-size: 1.15rem;
@@ -1184,13 +1188,45 @@ img {
   caret-color: var(--bone);
   transition: border-color 220ms var(--ease-out);
 }
+.field select {
+  appearance: none;
+  -webkit-appearance: none;
+  padding-right: 1.5rem;
+  background-image: linear-gradient(45deg, transparent 50%, var(--bone-dim) 50%),
+    linear-gradient(135deg, var(--bone-dim) 50%, transparent 50%);
+  background-position: calc(100% - 0.6rem) 50%, calc(100% - 0.25rem) 50%;
+  background-size: 0.35rem 0.35rem;
+  background-repeat: no-repeat;
+  cursor: pointer;
+}
+.field select option {
+  color: var(--bone);
+  background: var(--ink);
+}
+.field input::placeholder {
+  color: var(--bone-faint);
+}
+.field-optional {
+  text-transform: none;
+  letter-spacing: 0;
+  color: var(--bone-faint);
+}
+/* Honeypot: off-screen for people and screen readers; bots fill it in. */
+.field-trap {
+  position: absolute;
+  left: -10000px;
+  width: 1px;
+  height: 1px;
+  overflow: hidden;
+}
 .field textarea {
   resize: vertical;
   min-height: 7.5rem;
   line-height: 1.5;
 }
 .field input:focus,
-.field textarea:focus {
+.field textarea:focus,
+.field select:focus {
   outline: none;
   border-bottom-color: var(--bone);
 }
@@ -1749,3 +1785,151 @@ img {
   gap: 0.5rem;
 }
 
+
+/* ---------- Work page (/trabajo/<slug>) ---------- */
+.work-sheet-link {
+  margin-top: 1.1rem;
+  color: var(--bone-dim);
+}
+@media (hover: hover) and (pointer: fine) {
+  .work-sheet-link:hover {
+    color: var(--bone);
+  }
+}
+.work-page {
+  max-width: 80rem;
+  margin: 0 auto;
+}
+.work-page-head {
+  display: grid;
+  gap: 1.1rem;
+  margin: clamp(2rem, 4vw, 3.5rem) 0 clamp(2rem, 4vw, 3rem);
+}
+.work-page-title {
+  margin: 0;
+  font-family: var(--font-display);
+  font-weight: 360;
+  font-size: clamp(2.8rem, 7vw, 7rem);
+  line-height: 0.94;
+  letter-spacing: -0.02em;
+  text-wrap: balance;
+}
+.work-page-roles {
+  margin: 0;
+  display: flex;
+  flex-wrap: wrap;
+  align-items: baseline;
+  gap: 0.4rem 1rem;
+}
+.work-page-roles > .meta:first-child {
+  color: var(--bone-faint);
+}
+.work-page-roles .work-roles {
+  color: var(--bone);
+}
+.work-page-frame {
+  position: relative;
+  aspect-ratio: 16 / 9;
+  max-width: 100%;
+  background: var(--ink-3);
+  overflow: hidden;
+}
+.work-page-frame[data-vertical="true"] {
+  aspect-ratio: 9 / 16;
+  width: min(100%, 26rem);
+  margin: 0 auto;
+}
+.work-page-frame iframe,
+.work-page-play {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  border: 0;
+}
+.work-page-play {
+  padding: 0;
+  background: none;
+  cursor: pointer;
+}
+.work-page-play img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  transition: transform 700ms var(--ease-out);
+}
+.work-page-play .play-chip {
+  left: clamp(0.75rem, 2vw, 1.5rem);
+  bottom: clamp(0.75rem, 2vw, 1.5rem);
+}
+@media (hover: hover) and (pointer: fine) {
+  .work-page-play:hover img {
+    transform: scale(1.02);
+  }
+}
+.work-page .work-details {
+  max-width: none;
+}
+.work-still-open {
+  display: block;
+  width: 100%;
+  height: 100%;
+  padding: 0;
+  border: 0;
+  background: none;
+  cursor: zoom-in;
+}
+.work-cta {
+  display: grid;
+  justify-items: start;
+  gap: 1rem;
+  margin-top: clamp(4rem, 8vw, 7rem);
+  padding-top: clamp(2rem, 4vw, 3rem);
+  border-top: 1px solid var(--rule);
+}
+.work-cta-title {
+  margin: 0;
+  font-family: var(--font-display);
+  font-weight: 360;
+  font-size: clamp(2.2rem, 5vw, 4.5rem);
+  line-height: 0.98;
+  letter-spacing: -0.02em;
+  text-wrap: balance;
+}
+.work-cta p {
+  margin: 0 0 0.5rem;
+  max-width: 46ch;
+  color: var(--bone-dim);
+  font-size: clamp(1.05rem, 1.3vw, 1.2rem);
+}
+.work-pager {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 1.5rem;
+  margin: clamp(4rem, 8vw, 7rem) 0 clamp(3rem, 6vw, 5rem);
+  padding-top: 1.5rem;
+  border-top: 1px solid var(--rule);
+}
+.work-pager-link {
+  display: grid;
+  gap: 0.6rem;
+  align-content: start;
+  color: var(--bone-dim);
+}
+.work-pager-next {
+  text-align: right;
+  justify-items: end;
+}
+.work-pager-title {
+  font-family: var(--font-display);
+  font-weight: 360;
+  font-size: clamp(1.5rem, 3vw, 2.6rem);
+  line-height: 1;
+  color: var(--bone);
+  text-wrap: balance;
+}
+@media (hover: hover) and (pointer: fine) {
+  .work-pager-link:hover .work-pager-title {
+    opacity: 0.75;
+  }
+}

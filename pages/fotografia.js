@@ -1,5 +1,5 @@
 import { useCallback, useEffect, useState } from "react";
-import Head from "next/head";
+import Seo from "../components/Seo";
 import Image from "next/image";
 import Header from "../components/Header";
 import Footer from "../components/Footer";
@@ -39,14 +39,12 @@ export default function Photography({ photos }) {
 
   return (
     <>
-      <Head>
-        <title>{`${t.photoTitle} — Javier Llarena`}</title>
-        <meta name="description" content={t.photoIntro} />
-        <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
-        <meta name="theme-color" content="#0b0b0a" />
-        <link rel="canonical" href="https://javierllarenafilms.com/fotografia" />
-        {photos[0] && <meta property="og:image" content={`https://javierllarenafilms.com${photos[0].src}`} />}
-      </Head>
+      <Seo
+        title={`${t.photoTitle} — Javier Llarena`}
+        description={t.photoIntro}
+        path="/fotografia"
+        image={photos[0] && photos[0].src}
+      />
       <FilmicDefs />
       <Header alwaysSolid />
       <main id="top" className="page">

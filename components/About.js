@@ -1,4 +1,5 @@
 import { useLang } from "../lib/i18n";
+import { responsive } from "../lib/img";
 
 // Samba-style about: a wide set photo, the role as a large heading with the
 // statement, then a portrait photo beside the bio.
@@ -11,7 +12,7 @@ export default function About() {
   return (
     <section id="about" className="section about" aria-labelledby="about-title">
       <figure className="about-wide">
-        <img src={WIDE.src} alt="" loading="lazy" decoding="async" style={{ objectPosition: WIDE.pos }} />
+        <img {...responsive(WIDE.src, "100vw", [828, 1200, 1920])} alt="" loading="lazy" decoding="async" style={{ objectPosition: WIDE.pos }} />
       </figure>
 
       <div className="about-head">
@@ -23,7 +24,7 @@ export default function About() {
 
       <div className="about-split">
         <figure className="about-portrait">
-          <img src={PORTRAIT.src} alt="" loading="lazy" decoding="async" style={{ objectPosition: PORTRAIT.pos }} />
+          <img {...responsive(PORTRAIT.src, "(max-width: 760px) 100vw, 40vw", [640, 1080])} alt="" loading="lazy" decoding="async" style={{ objectPosition: PORTRAIT.pos }} />
         </figure>
         <div className="about-body">
           {t.aboutBody.map((para) => (

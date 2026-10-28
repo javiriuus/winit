@@ -4,6 +4,7 @@ import { thumbFor } from "../lib/content";
 import { ArrowIcon, PlayIcon } from "./Icons";
 import Thumb from "./Thumb";
 import Roles from "./Roles";
+import WorkDetails from "./WorkDetails";
 
 export default function Portfolio({ works, onPlay }) {
   const { t } = useLang();
@@ -35,6 +36,7 @@ export default function Portfolio({ works, onPlay }) {
 
 // One large frame per row, in a single column (Samba-style reel).
 function WorkGrid({ works, onPlay, t }) {
+  const { path } = useLang();
   const total = String(works.length).padStart(2, "0");
   return (
     <ul className="work-reel">
@@ -42,6 +44,9 @@ function WorkGrid({ works, onPlay, t }) {
         <li key={w.id} data-vertical={!!w.vertical}>
           <WorkCard w={w} i={i} total={total} onPlay={onPlay} t={t} />
           <WorkDetails w={w} />
+          <a className="meta work-sheet-link link-line" href={path(`/trabajo/${w.slug}`)}>
+            {t.workSheet} →
+          </a>
         </li>
       ))}
     </ul>
@@ -68,43 +73,6 @@ function WorkCard({ w, i, total, onPlay, t }) {
         </span>
       </span>
     </button>
-  );
-}
-
-// Extended sheet for works that have it (synopsis, festival selections, stills).
-function WorkDetails({ w }) {
-  const { lang, t } = useLang();
-  if (!w.synopsis && !w.selections && !w.stills) return null;
-  return (
-    <div className="work-details">
-      <div className="work-details-text">
-        {w.synopsis && (
-          <div className="work-synopsis">
-            <h3 className="meta">{t.synopsisLabel}</h3>
-            <p>{w.synopsis[lang]}</p>
-          </div>
-        )}
-        {w.selections && (
-          <div className="work-selections">
-            <h3 className="meta">{t.selectionsLabel}</h3>
-            <ul>
-              {w.selections.map((f) => (
-                <li key={f}>{f}</li>
-              ))}
-            </ul>
-          </div>
-        )}
-      </div>
-      {w.stills && (
-        <ul className="work-stills" aria-label={t.stillsLabel(w.title)}>
-          {w.stills.map((src) => (
-            <li key={src}>
-              <img src={src} alt="" loading="lazy" decoding="async" />
-            </li>
-          ))}
-        </ul>
-      )}
-    </div>
   );
 }
 

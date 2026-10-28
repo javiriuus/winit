@@ -3,6 +3,7 @@ import { useLang } from "../lib/i18n";
 import { stills } from "../lib/content";
 import { PlayIcon } from "./Icons";
 import Thumb from "./Thumb";
+import { responsive } from "../lib/img";
 
 const INTERVAL = 5200;
 
@@ -39,7 +40,7 @@ export default function Hero({ featured, onPlay }) {
             <div className="hero-frame" data-active={i === active} key={s.src}>
               {i <= reached && (
                 <img
-                  src={s.src}
+                  {...responsive(s.src, "100vw", [828, 1200, 1920])}
                   alt=""
                   style={{ objectPosition: s.pos }}
                   fetchpriority={i === 0 ? "high" : "low"}

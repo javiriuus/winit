@@ -4,7 +4,7 @@ import { useLang } from "../lib/i18n";
 import { CloseIcon } from "./Icons";
 
 export default function Header({ alwaysSolid = false }) {
-  const { lang, setLang, t } = useLang();
+  const { lang, setLang, t, path } = useLang();
   const { pathname } = useRouter();
   const [solid, setSolid] = useState(alwaysSolid);
   const [menuOpen, setMenuOpen] = useState(false);
@@ -31,11 +31,11 @@ export default function Header({ alwaysSolid = false }) {
   }, [menuOpen]);
 
   const links = [
-    { href: "/#work", label: t.navWork },
-    { href: "/fotografia", label: t.navPhoto, current: pathname.startsWith("/fotografia") },
-    { href: "/#services", label: t.navServices },
-    { href: "/foro", label: t.navForum, current: pathname.startsWith("/foro") },
-    { href: "/#contact", label: t.navContact },
+    { href: path("/#work"), label: t.navWork },
+    { href: path("/fotografia"), label: t.navPhoto, current: pathname.startsWith("/fotografia") },
+    { href: path("/#services"), label: t.navServices },
+    { href: path("/foro"), label: t.navForum, current: pathname.startsWith("/foro") },
+    { href: path("/#contact"), label: t.navContact },
   ];
 
   const langSwitch = (
@@ -54,7 +54,7 @@ export default function Header({ alwaysSolid = false }) {
 
   return (
     <header className="site-header" data-solid={solid}>
-      <a href="/" className="wordmark" aria-label="Javier Llarena — JLF Creative Studio">
+      <a href={path("/")} className="wordmark" aria-label="Javier Llarena — JLF Creative Studio">
         <img src="/brand/jlf-mark.png" alt="" width="643" height="410" className="wordmark-mark" />
         <span className="wordmark-name">Javier Llarena</span>
       </a>

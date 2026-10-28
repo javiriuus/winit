@@ -1,6 +1,6 @@
 # 🎬 WinitMoney — Personal Portfolio
 
-Este es el portfolio personal de Javier Lorente, filmmaker, director creativo y narrador visual. Desarrollado con **Next.js** y estilizado con **Tailwind CSS**, este sitio web presenta una selección de trabajos visuales y servicios audiovisuales de alto nivel.
+Este es el portfolio personal de Javier Llarena, filmmaker, director creativo y narrador visual. Desarrollado con **Next.js** y estilizado con **Tailwind CSS**, este sitio web presenta una selección de trabajos visuales y servicios audiovisuales de alto nivel.
 
 ---
 
@@ -124,3 +124,34 @@ Para conservar los metadatos, sube los archivos originales (desde el ordenador, 
 3. Pulsa **Commit changes**. En uno o dos minutos ya están en la web.
 
 Para quitar una foto, ábrela en GitHub y bórrala (icono de la papelera).
+
+---
+
+## 🎬 Añadir o editar trabajos
+
+Los trabajos están en `lib/catalog.mjs`. Cada uno tiene su ficha en `javierllarenafilms.com/trabajo/<slug>` (y en inglés en `/en/trabajo/<slug>`), con vídeo, roles, sinopsis, festivales y fotogramas si los tiene.
+
+- `slug`: la dirección de la ficha. Si no lo pones, se crea a partir del título. No lo cambies una vez publicado, o los enlaces antiguos dejarán de funcionar.
+- `synopsis`, `selections` y `stills` son opcionales y sirven para cualquier trabajo, no solo para S.E.P.
+
+## 🌍 Idiomas
+
+- Español en `/`, inglés en `/en`. Google indexa las dos versiones.
+- La primera visita a la portada sigue el idioma del navegador; el botón ES/EN recuerda la elección.
+
+## 📈 SEO, RSS y estadísticas
+
+En cada publicación de la web se generan solos:
+
+- `sitemap.xml`: todas las páginas en los dos idiomas (envíalo una vez en Google Search Console).
+- `feed.xml` y `feed-en.xml`: RSS del foro, para lectores RSS o newsletters automáticas.
+
+Las estadísticas de visitas (Vercel Web Analytics) y de velocidad (Speed Insights) ya están conectadas; empiezan a contar cuando se activan en el panel de Vercel. Cada envío del formulario se registra como el evento `contact_sent`.
+
+## 🛡️ Formulario de contacto
+
+Protegido contra spam con un campo oculto, un tiempo mínimo de rellenado, un límite de enlaces y un máximo de 5 envíos cada 10 minutos por IP. Los mensajes llegan con el tipo de proyecto, las fechas y el presupuesto si se han indicado. Necesita las variables `EMAIL_USER` y `EMAIL_PASS` en Vercel.
+
+## 🔒 Dependencias
+
+Dependabot (`.github/dependabot.yml`) abre cada lunes pull requests con las actualizaciones. Next.js se mantiene en la rama 14 (el salto a la 15 requiere una migración).

@@ -1,5 +1,4 @@
 import { useCallback, useState } from "react";
-import Head from "next/head";
 import Header from "../components/Header";
 import Hero from "../components/Hero";
 import Portfolio from "../components/Portfolio";
@@ -10,6 +9,8 @@ import Contact from "../components/Contact";
 import Footer from "../components/Footer";
 import Player from "../components/Player";
 import FilmicDefs from "../components/FilmicDefs";
+import Seo from "../components/Seo";
+import { graph, organization, person, website } from "../lib/schema";
 import { useLang } from "../lib/i18n";
 import { featuredOf } from "../lib/content";
 import { resolveWorks } from "../lib/resolve-works";
@@ -19,51 +20,18 @@ export async function getStaticProps() {
 }
 
 export default function Home({ works }) {
-  const { t } = useLang();
+  const { lang, t } = useLang();
   const [playing, setPlaying] = useState(null);
   const close = useCallback(() => setPlaying(null), []);
 
   return (
     <>
-      <Head>
-        <title>Javier Llarena — Director</title>
-        <meta
-          name="description"
-          content="Javier Llarena, cineasta, director creativo y director de fotografía. Videoclips, cortometrajes y contenido de marca."
-        />
-        <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
-        <meta name="theme-color" content="#0b0b0a" />
-        <meta property="og:title" content="Javier Llarena — Director" />
-        <link rel="canonical" href="https://javierllarenafilms.com/" />
-        <meta property="og:url" content="https://javierllarenafilms.com/" />
-        <meta property="og:type" content="website" />
-        <meta property="og:image" content="https://javierllarenafilms.com/images/000026.JPG" />
-        <meta name="twitter:card" content="summary_large_image" />
-        <meta property="og:site_name" content="Javier Llarena" />
-        <script
-          type="application/ld+json"
-          // Site name and logo for Google's results (name next to the favicon).
-          dangerouslySetInnerHTML={{
-            __html: JSON.stringify([
-              {
-                "@context": "https://schema.org",
-                "@type": "WebSite",
-                name: "Javier Llarena",
-                alternateName: ["JLF Creative Studio", "Javier Llarena Films"],
-                url: "https://javierllarenafilms.com/",
-              },
-              {
-                "@context": "https://schema.org",
-                "@type": "Organization",
-                name: "JLF Creative Studio",
-                url: "https://javierllarenafilms.com/",
-                logo: "https://javierllarenafilms.com/icon-512.png",
-                founder: { "@type": "Person", name: "Javier Llarena" },
-              },
-            ]),
-          }}
-        />
-      </Head>
+      <Seo
+        title={t.homeTitle}
+        description={t.homeDescription}
+        path="/"
+        jsonLd={graph(website(), organization(lang), person(lang))}
+      />
 
       <FilmicDefs />
       <a className="skip" href="#work">

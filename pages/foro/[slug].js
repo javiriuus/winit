@@ -1,5 +1,5 @@
 import { useCallback, useState } from "react";
-import Head from "next/head";
+import Seo from "../../components/Seo";
 import Header from "../../components/Header";
 import Footer from "../../components/Footer";
 import FilmicDefs from "../../components/FilmicDefs";
@@ -7,9 +7,14 @@ import PostDate from "../../components/PostDate";
 import Lightbox from "../../components/Lightbox";
 import { useLang } from "../../lib/i18n";
 import { getAllPosts, getPost } from "../../lib/posts";
+import { responsive } from "../../lib/img";
+import { SITE, PERSON_ID, ORG_ID, graph } from "../../lib/schema";
 
-export async function getStaticPaths() {
-  return { paths: getAllPosts().map((p) => ({ params: { slug: p.slug } })), fallback: false };
+export async function getStaticPaths({ locales = ["es"] }) {
+  return {
+    paths: getAllPosts().flatMap((p) => locales.map((locale) => ({ params: { slug: p.slug }, locale }))),
+    fallback: false,
+  };
 }
 
 export async function getStaticProps({ params }) {
@@ -17,7 +22,7 @@ export async function getStaticProps({ params }) {
 }
 
 export default function Post({ post }) {
-  const { lang, t } = useLang();
+  const { lang, t, path } = useLang();
   const v = (lang === "en" && post.en) || post.es;
   const fellBack = lang === "en" && !post.en;
   const [photos, setPhotos] = useState([]);
@@ -31,28 +36,37 @@ export default function Post({ post }) {
     const imgs = [...e.currentTarget.querySelectorAll("img[width][height]")];
     const i = imgs.indexOf(img);
     if (i < 0) return;
-    setPhotos(imgs.map((el) => ({ src: el.getAttribute("src"), w: +el.getAttribute("width"), h: +el.getAttribute("height") })));
+    setPhotos(imgs.map((el) => ({ src: el.dataset.full || el.getAttribute("src"), w: +el.getAttribute("width"), h: +el.getAttribute("height") })));
     setOpen(i);
   };
 
   return (
     <>
-      <Head>
-        <title>{`${v.title} — Javier Llarena`}</title>
-        <meta name="description" content={v.excerpt} />
-        <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
-        <meta name="theme-color" content="#0b0b0a" />
-        <link rel="canonical" href={`https://javierllarenafilms.com/foro/${post.slug}`} />
-        <meta property="og:title" content={v.title} />
-        <meta property="og:description" content={v.excerpt} />
-        <meta property="og:type" content="article" />
-        {post.cover && <meta property="og:image" content={`https://javierllarenafilms.com${post.cover}`} />}
-      </Head>
+      <Seo
+        title={`${v.title} — Javier Llarena`}
+        description={v.excerpt}
+        path={`/foro/${post.slug}`}
+        image={post.cover}
+        imageAlt={v.title}
+        type="article"
+        english={!!post.en}
+        jsonLd={graph({
+          "@type": "BlogPosting",
+          headline: v.title,
+          description: v.excerpt,
+          datePublished: post.date,
+          inLanguage: fellBack ? "es" : lang,
+          image: post.cover ? SITE + post.cover : undefined,
+          url: SITE + path(`/foro/${post.slug}`),
+          author: { "@id": PERSON_ID },
+          publisher: { "@id": ORG_ID },
+        })}
+      />
       <FilmicDefs />
       <Header alwaysSolid />
       <main id="top" className="page">
         <article className="section post">
-          <a href="/foro" className="meta post-back link-line">
+          <a href={path("/foro")} className="meta post-back link-line">
             ← {t.backToForum}
           </a>
           <header className="post-head">
@@ -61,12 +75,12 @@ export default function Post({ post }) {
           </header>
           {post.cover && (
             <figure className="post-cover">
-              <img src={post.cover} alt="" decoding="async" />
+              <img {...responsive(post.cover, "(max-width: 1100px) 100vw, 64rem", [828, 1200, 1920])} alt="" decoding="async" />
             </figure>
           )}
           {fellBack && <p className="meta post-note">{t.onlySpanish}</p>}
           <div className="post-body" onClick={onBodyClick} dangerouslySetInnerHTML={{ __html: v.html }} />
-          <a href="/foro" className="meta post-back post-back-end link-line">
+          <a href={path("/foro")} className="meta post-back post-back-end link-line">
             ← {t.backToForum}
           </a>
         </article>
