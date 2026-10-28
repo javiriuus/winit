@@ -46,8 +46,12 @@ export default function WorkPage({ work, prev, next }) {
   const [open, setOpen] = useState(null);
   const close = useCallback(() => setOpen(null), []);
 
-  const roles = work.roles.map((r) => t.roles[r] || r).join(", ");
-  const description = work.synopsis ? work.synopsis[lang] : t.workDescription(work.title, roles);
+  const roleNames = work.roles.map((r) => t.roles[r] || r);
+  const about = t.workAbout(work.type, roleNames);
+  const typeLabel = t.workTypes[work.type];
+  const description = work.synopsis
+    ? work.synopsis[lang]
+    : `${typeLabel ? `${typeLabel}: ${work.title}. ` : `${work.title}. `}${about.join(" ")}`;
   const url = SITE + path(`/trabajo/${work.slug}`);
   const image = thumbFor(work) || undefined;
   const photos = (work.stills || []).map((src) => ({ src, ...stillSize }));
@@ -85,7 +89,7 @@ export default function WorkPage({ work, prev, next }) {
   return (
     <>
       <Seo
-        title={`${work.title} — Javier Llarena`}
+        title={`${work.title}${typeLabel ? ` · ${typeLabel}` : ""} — Javier Llarena`}
         description={description}
         path={`/trabajo/${work.slug}`}
         image={image}
@@ -110,6 +114,7 @@ export default function WorkPage({ work, prev, next }) {
           <header className="work-page-head">
             <h1 className="work-page-title">{work.title}</h1>
             <p className="work-page-roles">
+              {typeLabel && <span className="meta work-page-type">{typeLabel}</span>}
               <span className="meta">{t.rolesLabel}</span>
               <Roles roles={work.roles} />
             </p>
@@ -135,6 +140,12 @@ export default function WorkPage({ work, prev, next }) {
           </div>
 
           <WorkDetails w={work} onStill={(src) => setOpen(work.stills.indexOf(src))} />
+
+          <div className="work-about">
+            {about.map((line) => (
+              <p key={line}>{line}</p>
+            ))}
+          </div>
 
           <aside className="work-cta" aria-labelledby="work-cta-title">
             <h2 id="work-cta-title" className="work-cta-title">

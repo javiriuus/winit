@@ -54,6 +54,8 @@ Two families, both self-hosted in `public/fonts` (OFL):
 - Favicons: the JLF mark centered on an ink square (`favicon.ico` 16/32/48, `icon-48/96/192/512.png`, `apple-touch-icon.png`, `site.webmanifest`). The home page carries WebSite + Organization JSON-LD (site name and logo for Google).
 
 - Work page (`/trabajo/<slug>`, `/en/trabajo/<slug>`): 80rem column; back link, title in the display face (up to 7rem) with "Mi papel" + roles, the video frame (16:9, or 9:16 at 26rem for Shorts) that plays in place, the work sheet (synopsis, selections, stills that open the lightbox), a "¿Tienes un proyecto parecido?" call to action with the pill button, and previous/next titles in the display face. Every reel item on the home links to its page ("Ver ficha →", centered meta link).
+- Studio block (home, after services, `#studio`): section title "Producción audiovisual en Madrid", a large lead paragraph (34ch), three audiences in columns (artists, brands, production companies), then "Cómo trabajo" as a numbered 4-step list (a real sequence) beside an FAQ of `<details>` rows with a +/× marker. The FAQ is also published as FAQPage JSON-LD.
+- Work page text: under the sheet, two lines generated from the work's `type` and roles (role in bone, service sentence in bone-dim, 62ch), so every page has its own indexable description.
 
 ## Components
 
