@@ -12,3 +12,4 @@ yarn-error.log*
 
 # design review captures
 .impeccable/review/
+public/sitemap.xml

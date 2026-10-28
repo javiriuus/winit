@@ -6,6 +6,7 @@ export default function Document() {
       <Head>
         <link rel="preload" href="/fonts/schibsted-grotesk.woff" as="font" type="font/woff" crossOrigin="anonymous" />
         <link rel="preload" href="/fonts/noto-serif-display.woff" as="font" type="font/woff" crossOrigin="anonymous" />
+        <meta name="google-site-verification" content="TE8MDAXuOTUN51jc17Q7M2xLXSRAtzz0dr63VkrZ5ZA" />
         <link rel="icon" href="/favicon.ico" sizes="48x48" />
         <link rel="icon" type="image/png" sizes="96x96" href="/icon-96.png" />
         <link rel="icon" type="image/png" sizes="192x192" href="/icon-192.png" />
