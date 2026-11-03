@@ -1,7 +1,7 @@
 import { useEffect, useRef, useState } from "react";
 import { useLang } from "../lib/i18n";
 import { thumbFor } from "../lib/content";
-import { ArrowIcon, PlayIcon } from "./Icons";
+import { ArrowIcon, ChevronIcon, PlayIcon } from "./Icons";
 import Thumb from "./Thumb";
 import Roles from "./Roles";
 import WorkDetails from "./WorkDetails";
@@ -34,22 +34,141 @@ export default function Portfolio({ works, onPlay }) {
   );
 }
 
-// One large frame per row, in a single column (Samba-style reel).
+// The latest short gets the large frame with its sheet; every other work slides
+// past in a horizontal reel below it.
 function WorkGrid({ works, onPlay, t }) {
   const { path } = useLang();
   const total = String(works.length).padStart(2, "0");
+  const featured = works.filter((w) => w.latestShort);
+  const rest = works.filter((w) => !w.latestShort);
   return (
-    <ul className="work-reel">
-      {works.map((w, i) => (
-        <li key={w.id} data-vertical={!!w.vertical}>
-          <WorkCard w={w} i={i} total={total} onPlay={onPlay} t={t} />
-          <WorkDetails w={w} />
-          <a className="meta work-sheet-link link-line" href={path(`/trabajo/${w.slug}`)}>
-            {t.workSheet} →
-          </a>
-        </li>
-      ))}
-    </ul>
+    <>
+      {featured.length > 0 && (
+        <ul className="work-reel">
+          {featured.map((w, i) => (
+            <li key={w.id} data-vertical={!!w.vertical}>
+              <WorkCard w={w} i={i} total={total} onPlay={onPlay} t={t} />
+              <WorkDetails w={w} />
+              <a className="meta work-sheet-link link-line" href={path(`/trabajo/${w.slug}`)}>
+                {t.workSheet} →
+              </a>
+            </li>
+          ))}
+        </ul>
+      )}
+      <WorkCarousel works={rest} offset={featured.length} total={total} onPlay={onPlay} t={t} />
+    </>
+  );
+}
+
+const ADVANCE_MS = 4500;
+
+// Horizontal reel that moves one work at a time on its own. It pauses while the
+// pointer or keyboard focus is on it and while it is off screen, and stops for good
+// once someone scrolls it, uses the arrows or opens a video, so it stays where they left it.
+function WorkCarousel({ works, offset, total, onPlay, t }) {
+  const { path } = useLang();
+  const trackRef = useRef(null);
+  const [stopped, setStopped] = useState(false);
+  const paused = useRef(false);
+  const visible = useRef(false);
+
+  const items = () => [...(trackRef.current?.children || [])];
+  const currentIndex = () => {
+    const track = trackRef.current;
+    const left = track.scrollLeft;
+    let best = 0;
+    items().forEach((el, i) => {
+      if (Math.abs(el.offsetLeft - track.offsetLeft - left) < Math.abs(items()[best].offsetLeft - track.offsetLeft - left)) best = i;
+    });
+    return best;
+  };
+  const goTo = (i) => {
+    const track = trackRef.current;
+    const list = items();
+    if (!track || !list.length) return;
+    const n = (i + list.length) % list.length;
+    track.scrollTo({ left: list[n].offsetLeft - track.offsetLeft, behavior: "smooth" });
+  };
+  const atEnd = () => {
+    const track = trackRef.current;
+    return track.scrollLeft + track.clientWidth >= track.scrollWidth - 8;
+  };
+
+  useEffect(() => {
+    if (stopped) return;
+    if (window.matchMedia("(prefers-reduced-motion: reduce)").matches) return;
+    const track = trackRef.current;
+    const io = new IntersectionObserver(([e]) => (visible.current = e.isIntersecting), { threshold: 0.4 });
+    io.observe(track);
+    const id = setInterval(() => {
+      if (paused.current || !visible.current || document.hidden) return;
+      goTo(atEnd() ? 0 : currentIndex() + 1);
+    }, ADVANCE_MS);
+    return () => {
+      clearInterval(id);
+      io.disconnect();
+    };
+  }, [stopped]);
+
+  const stop = () => setStopped(true);
+  const play = (w) => {
+    stop();
+    onPlay(w);
+  };
+
+  if (!works.length) return null;
+
+  return (
+    <div className="work-carousel">
+      <div className="work-carousel-head">
+        <span className="meta">{t.moreWork}</span>
+        <div className="work-carousel-arrows">
+          <button
+            type="button"
+            className="player-close"
+            aria-label={t.prev}
+            onClick={() => {
+              stop();
+              goTo(currentIndex() - 1);
+            }}
+          >
+            <ChevronIcon dir="left" />
+          </button>
+          <button
+            type="button"
+            className="player-close"
+            aria-label={t.next}
+            onClick={() => {
+              stop();
+              goTo(atEnd() ? 0 : currentIndex() + 1);
+            }}
+          >
+            <ChevronIcon />
+          </button>
+        </div>
+      </div>
+      <ul
+        className="work-carousel-track"
+        ref={trackRef}
+        onPointerEnter={(e) => e.pointerType === "mouse" && (paused.current = true)}
+        onPointerLeave={() => (paused.current = false)}
+        onFocus={() => (paused.current = true)}
+        onBlur={() => (paused.current = false)}
+        onWheel={(e) => Math.abs(e.deltaX) > Math.abs(e.deltaY) && stop()}
+        onTouchStart={stop}
+        onPointerDown={(e) => e.pointerType !== "mouse" && stop()}
+      >
+        {works.map((w, i) => (
+          <li key={w.id} data-vertical={!!w.vertical}>
+            <WorkCard w={w} i={i + offset} total={total} onPlay={play} t={t} />
+            <a className="meta work-sheet-link link-line" href={path(`/trabajo/${w.slug}`)}>
+              {t.workSheet} →
+            </a>
+          </li>
+        ))}
+      </ul>
+    </div>
   );
 }
 
