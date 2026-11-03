@@ -7,7 +7,7 @@ import Thumb from "../../components/Thumb";
 import Roles from "../../components/Roles";
 import WorkDetails from "../../components/WorkDetails";
 import Lightbox from "../../components/Lightbox";
-import { PlayIcon, ArrowIcon, WhatsAppIcon } from "../../components/Icons";
+import { PlayIcon, ArrowIcon } from "../../components/Icons";
 import { useLang } from "../../lib/i18n";
 import { embedFor, thumbFor, watchUrlFor, whatsappUrl } from "../../lib/content";
 import { track } from "@vercel/analytics";
@@ -177,8 +177,7 @@ export default function WorkPage({ work, prev, next }) {
                 rel="noopener noreferrer"
                 onClick={() => track("whatsapp_click", { from: "work", work: work.slug })}
               >
-                <WhatsAppIcon />
-                WhatsApp
+                {t.whatsappCta}
               </a>
             </div>
           </aside>

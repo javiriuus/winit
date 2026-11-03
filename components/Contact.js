@@ -2,7 +2,7 @@ import { useEffect, useRef, useState } from "react";
 import { track } from "@vercel/analytics";
 import { useLang } from "../lib/i18n";
 import { contactEmail, social, whatsapp, whatsappUrl } from "../lib/content";
-import { ArrowIcon, WhatsAppIcon } from "./Icons";
+import { ArrowIcon } from "./Icons";
 
 const emailOk = (v) => /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(v);
 
@@ -70,16 +70,15 @@ export default function Contact() {
           <a className="contact-mail link-line" href={`mailto:${contactEmail}`}>
             {contactEmail}
           </a>
+          <span className="contact-or contact-or-next">{t.orWhatsapp}</span>
           <a
-            className="btn btn-outline contact-whatsapp"
+            className="contact-mail link-line"
             href={whatsappUrl(t.whatsappHello)}
             target="_blank"
             rel="noopener noreferrer"
             onClick={() => track("whatsapp_click", { from: "contact" })}
           >
-            <WhatsAppIcon />
-            {t.whatsappCta}
-            <span className="contact-whatsapp-number">{whatsapp.display}</span>
+            {whatsapp.display}
           </a>
           <div className="contact-social">
             {social.map((s) => (

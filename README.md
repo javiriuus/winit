@@ -158,4 +158,4 @@ Dependabot (`.github/dependabot.yml`) abre cada lunes pull requests con las actu
 
 ## ⚖️ Aviso legal y privacidad
 
-Los textos están en `lib/legal.js` (titular, NIF, domicilio y email arriba del archivo) y se publican en `/aviso-legal` y `/privacidad`, enlazados desde el pie y el formulario. Son textos estándar: conviene que los revise un gestor o abogado.
+Los textos están en `lib/legal.js` (titular, domicilio y email arriba del archivo) y se publican en `/aviso-legal` y `/privacidad`, enlazados desde el pie y el formulario. Son textos estándar: conviene que los revise un gestor o abogado.
