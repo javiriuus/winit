@@ -7,9 +7,10 @@ import Thumb from "../../components/Thumb";
 import Roles from "../../components/Roles";
 import WorkDetails from "../../components/WorkDetails";
 import Lightbox from "../../components/Lightbox";
-import { PlayIcon, ArrowIcon } from "../../components/Icons";
+import { PlayIcon, ArrowIcon, WhatsAppIcon } from "../../components/Icons";
 import { useLang } from "../../lib/i18n";
-import { embedFor, thumbFor, watchUrlFor } from "../../lib/content";
+import { embedFor, thumbFor, watchUrlFor, whatsappUrl } from "../../lib/content";
+import { track } from "@vercel/analytics";
 import { resolveWorks, uploadDateOf } from "../../lib/resolve-works";
 import { SITE, PERSON_ID, ORG_ID, graph, breadcrumbs } from "../../lib/schema";
 
@@ -164,10 +165,22 @@ export default function WorkPage({ work, prev, next }) {
               {t.workCtaTitle}
             </h2>
             <p>{t.workCtaText}</p>
-            <a className="btn" href={path("/#contact")}>
-              {t.workCtaButton}
-              <ArrowIcon size={16} />
-            </a>
+            <div className="work-cta-actions">
+              <a className="btn" href={path("/#contact")}>
+                {t.workCtaButton}
+                <ArrowIcon size={16} />
+              </a>
+              <a
+                className="btn btn-outline"
+                href={whatsappUrl(`${t.whatsappHello}(${work.title}) `)}
+                target="_blank"
+                rel="noopener noreferrer"
+                onClick={() => track("whatsapp_click", { from: "work", work: work.slug })}
+              >
+                <WhatsAppIcon />
+                WhatsApp
+              </a>
+            </div>
           </aside>
 
           <nav className="work-pager" aria-label={t.moreWork}>

@@ -64,3 +64,24 @@ export function ChevronIcon({ size = 16, dir = "right" }) {
     </svg>
   );
 }
+
+// Speech bubble with a handset, drawn in the set's stroke (not the WhatsApp logo).
+export function WhatsAppIcon({ size = 16 }) {
+  return (
+    <svg
+      width={size}
+      height={size}
+      viewBox="0 0 24 24"
+      fill="none"
+      stroke="currentColor"
+      strokeWidth="1.6"
+      strokeLinecap="round"
+      strokeLinejoin="round"
+      aria-hidden="true"
+      focusable="false"
+    >
+      <path d="M4.5 19.5 5.6 16A8 8 0 1 1 8.4 18.6Z" />
+      <path d="M9.2 8.6c.2-.4.5-.5.8-.5h.4c.2 0 .3.1.4.3l.7 1.6c.1.2 0 .4-.1.5l-.5.6c.6 1.1 1.4 1.9 2.5 2.5l.6-.5c.2-.1.4-.2.6-.1l1.6.7c.2.1.3.2.3.4v.4c0 .3-.2.6-.5.8-.6.4-1.5.5-2.4.1-1.9-.8-3.4-2.3-4.2-4.2-.4-.9-.3-1.8.1-2.4Z" />
+    </svg>
+  );
+}
