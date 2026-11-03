@@ -2,13 +2,17 @@ import { useLang } from "../lib/i18n";
 import { social } from "../lib/content";
 
 export default function Footer() {
-  const { t } = useLang();
+  const { t, path } = useLang();
 
   return (
     <footer className="site-footer">
       <img src="/brand/jlf-logo.png" alt="JLF Creative Studio" width="643" height="410" className="footer-logo" />
-      <span className="meta">
-        © {new Date().getFullYear()} Javier Llarena. {t.rights}
+      <span className="meta footer-legal">
+        <span>
+          © {new Date().getFullYear()} Javier Llarena. {t.rights}
+        </span>
+        <a href={path("/aviso-legal")}>{t.legalLink}</a>
+        <a href={path("/privacidad")}>{t.privacyLink}</a>
       </span>
       <nav aria-label="Social">
         {social.map((s) => (

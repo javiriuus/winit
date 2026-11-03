@@ -2071,3 +2071,73 @@ img {
     grid-template-columns: 1fr;
   }
 }
+
+.work-synopsis .work-specs {
+  margin-top: 1.25rem;
+  color: var(--bone);
+  font-size: 0.75rem;
+  line-height: 1.6;
+}
+.work-specs-label {
+  color: var(--bone-faint);
+  margin-right: 0.6rem;
+}
+
+.studio-brands {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: baseline;
+  gap: 0.5rem 1.25rem;
+  margin: clamp(2.5rem, 5vw, 3.5rem) 0 0;
+  padding-top: 1.25rem;
+  border-top: 1px solid var(--rule);
+}
+.studio-brands .meta {
+  color: var(--bone-faint);
+}
+.studio-brand-names {
+  font-family: var(--font-display);
+  font-weight: 360;
+  font-size: clamp(1.6rem, 3.2vw, 2.6rem);
+  letter-spacing: -0.01em;
+  line-height: 1;
+  filter: url(#filmic);
+}
+
+/* ---------- Legal pages and links ---------- */
+.legal {
+  max-width: 64rem;
+  margin: 0 auto;
+}
+.legal-updated {
+  margin: 0;
+  color: var(--bone-faint);
+}
+.legal .post-body h2 {
+  font-size: 1.25em;
+  margin-top: 2em;
+}
+.legal .post-body section > :last-child {
+  margin-bottom: 0;
+}
+.legal .post-body p {
+  color: var(--bone-dim);
+}
+.footer-legal {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.5rem 1.25rem;
+}
+.form-consent {
+  flex-basis: 100%;
+  order: 3;
+  margin: 0;
+  font-size: 0.85rem;
+  color: var(--bone-faint);
+}
+.legal .post-body section p {
+  margin: 0;
+}
+.legal .post-body section p + p {
+  margin-top: 0.9em;
+}

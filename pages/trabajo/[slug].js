@@ -66,8 +66,14 @@ export default function WorkPage({ work, prev, next }) {
         url,
         director: { "@id": PERSON_ID },
         productionCompany: { "@id": ORG_ID },
+        ...(work.specs
+          ? {
+              duration: `PT${work.specs.minutes}M`,
+              dateCreated: String(work.specs.year),
+              genre: work.specs.genre[lang],
+            }
+          : {}),
         ...(work.selections ? { award: work.selections.map((f) => (lang === "en" ? `Official selection, ${f}` : `Selección oficial, ${f}`)) } : {}),
-        ...(work.uploadDate ? { dateCreated: work.uploadDate } : {}),
         trailer: video(),
       }
     : video();
@@ -117,6 +123,12 @@ export default function WorkPage({ work, prev, next }) {
               {typeLabel && <span className="meta work-page-type">{typeLabel}</span>}
               <span className="meta">{t.rolesLabel}</span>
               <Roles roles={work.roles} />
+              {work.directedBy && (
+                <>
+                  <span className="meta">{t.directedByLabel}</span>
+                  <span className="meta work-roles">{work.directedBy}</span>
+                </>
+              )}
             </p>
           </header>
 

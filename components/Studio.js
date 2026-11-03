@@ -24,6 +24,11 @@ export default function Studio() {
         ))}
       </ul>
 
+      <p className="studio-brands">
+        <span className="meta">{s.brandsLabel}</span>
+        <span className="studio-brand-names">New Balance · Heineken</span>
+      </p>
+
       <div className="studio-split">
         <div>
           <h3 className="meta studio-label">{s.processTitle}</h3>

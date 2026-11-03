@@ -7,7 +7,7 @@ import { ArrowIcon } from "./Icons";
 const emailOk = (v) => /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(v);
 
 export default function Contact() {
-  const { t } = useLang();
+  const { t, path } = useLang();
   const [status, setStatus] = useState("idle"); // idle | invalid | sending | sent | error
   const [invalid, setInvalid] = useState({});
   // When the form appeared: real people take more than a few seconds to fill it in.
@@ -150,6 +150,13 @@ export default function Contact() {
               {status === "sending" ? t.sending : t.send}
               <ArrowIcon size={16} />
             </button>
+            <p className="form-consent">
+              {t.formConsent}{" "}
+              <a href={path("/privacidad")} className="link-line">
+                {t.formConsentLink}
+              </a>
+              .
+            </p>
             <p
               className="form-status"
               role="status"

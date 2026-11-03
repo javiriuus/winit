@@ -155,3 +155,7 @@ Protegido contra spam con un campo oculto, un tiempo mínimo de rellenado, un l�
 ## 🔒 Dependencias
 
 Dependabot (`.github/dependabot.yml`) abre cada lunes pull requests con las actualizaciones. Next.js se mantiene en la rama 14 (el salto a la 15 requiere una migración).
+
+## ⚖️ Aviso legal y privacidad
+
+Los textos están en `lib/legal.js` (titular, NIF, domicilio y email arriba del archivo) y se publican en `/aviso-legal` y `/privacidad`, enlazados desde el pie y el formulario. Son textos estándar: conviene que los revise un gestor o abogado.

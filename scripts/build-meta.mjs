@@ -64,6 +64,8 @@ const pages = [
   { loc: "/fotografia", lastmod: today, priority: "0.8" },
   { loc: "/foro", lastmod: posts[0] ? posts[0].date : today, priority: "0.7" },
   ...works.map((slug) => ({ loc: `/trabajo/${slug}`, lastmod: today, priority: "0.7" })),
+  { loc: "/aviso-legal", lastmod: today, priority: "0.2" },
+  { loc: "/privacidad", lastmod: today, priority: "0.2" },
   ...posts.map((p) => ({ loc: `/foro/${p.slug}`, lastmod: p.date, priority: "0.6", english: !!p.en })),
 ];
 

@@ -4,7 +4,10 @@ import { responsive } from "../lib/img";
 // Extended sheet for works that have it (synopsis, festival selections, stills).
 export default function WorkDetails({ w, onStill }) {
   const { lang, t } = useLang();
-  if (!w.synopsis && !w.selections && !w.stills) return null;
+  if (!w.synopsis && !w.selections && !w.stills && !w.specs) return null;
+  const specs = w.specs
+    ? [w.specs.minutes && `${w.specs.minutes} min`, w.specs.year, w.specs.format, w.specs.genre && w.specs.genre[lang]].filter(Boolean)
+    : null;
   return (
     <div className="work-details">
       <div className="work-details-text">
@@ -12,6 +15,11 @@ export default function WorkDetails({ w, onStill }) {
           <div className="work-synopsis">
             <h3 className="meta">{t.synopsisLabel}</h3>
             <p>{w.synopsis[lang]}</p>
+            {specs && (
+              <p className="meta work-specs">
+                <span className="work-specs-label">{t.specsLabel}</span> {specs.join(" · ")}
+              </p>
+            )}
           </div>
         )}
         {w.selections && (
