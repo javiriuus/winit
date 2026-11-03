@@ -2162,9 +2162,8 @@ img {
   margin-top: 1.5rem;
 }
 
-/* ---------- Horizontal reel of works (all but the latest short) ---------- */
+/* ---------- Works slider: one large work at a time (all but the latest short) ---------- */
 .work-carousel {
-  --h: clamp(11.5rem, 24vw, 22rem); /* frame height shared by every card */
   margin-top: clamp(4.5rem, 9vw, 8rem);
   padding-top: 1.25rem;
   border-top: 1px solid var(--rule);
@@ -2174,7 +2173,7 @@ img {
   justify-content: space-between;
   align-items: center;
   gap: 1rem;
-  margin-bottom: 1.5rem;
+  margin-bottom: clamp(1.5rem, 3vw, 2.5rem);
 }
 .work-carousel-head .meta {
   color: var(--bone-dim);
@@ -2185,56 +2184,50 @@ img {
 }
 .work-carousel-track {
   list-style: none;
-  margin: 0 calc(var(--gutter) * -1);
-  padding: 0 var(--gutter) 0.5rem;
+  margin: 0;
+  padding: 0;
   display: flex;
   align-items: flex-start;
-  gap: clamp(1rem, 2.4vw, 2rem);
   overflow-x: auto;
   overscroll-behavior-x: contain;
   scroll-snap-type: x mandatory;
-  scroll-padding-inline: var(--gutter);
   scrollbar-width: none;
 }
 .work-carousel-track::-webkit-scrollbar {
   display: none;
 }
+/* Each slide is as wide as the column and lays its work out exactly like the reel above. */
 .work-carousel-track > li {
-  flex: none;
-  width: calc(var(--h) * 16 / 9);
-  max-width: calc(100vw - var(--gutter) * 2);
+  flex: 0 0 100%;
+  min-width: 0;
   scroll-snap-align: start;
+  scroll-snap-stop: always;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+.work-carousel-track li[data-vertical="false"] .work-card {
+  max-width: calc((100vh - 11rem) * 16 / 9);
+}
+.work-carousel-track li[data-vertical="true"] .work-card {
   display: grid;
-  justify-items: start;
+  grid-template-columns: clamp(15rem, 27vw, 25rem) auto;
+  align-items: end;
+  gap: clamp(1.25rem, 3vw, 3rem);
+  width: auto;
 }
-.work-carousel-track > li[data-vertical="true"] {
-  width: calc(var(--h) * 9 / 16);
-}
-.work-carousel-track .work-frame {
-  height: var(--h);
-  aspect-ratio: auto;
-}
-.work-carousel-track .work-cap {
-  align-items: flex-start;
-}
-.work-carousel-track .work-title {
-  font-size: clamp(1.35rem, 2.1vw, 2rem);
+.work-carousel-track li[data-vertical="true"] .work-frame {
+  aspect-ratio: 9 / 16;
 }
 .work-carousel-track li[data-vertical="true"] .work-cap {
   flex-direction: column;
-  gap: 0.6rem;
-}
-.work-carousel-track .work-sheet-link {
-  margin-top: 0.9rem;
+  align-items: flex-start;
+  gap: 0.75rem;
+  margin-top: 0;
 }
 @media (max-width: 560px) {
-  .work-carousel {
-    --h: calc((100vw - var(--gutter) * 2) * 0.5);
-  }
-  .work-carousel-track > li[data-vertical="true"] {
-    width: calc(var(--h) * 9 / 16 * 1.6);
-  }
-  .work-carousel-track li[data-vertical="true"] .work-frame {
-    height: calc(var(--h) * 1.6);
+  .work-carousel-track li[data-vertical="true"] .work-card {
+    grid-template-columns: 1fr;
+    width: min(100%, 20rem);
   }
 }

@@ -61,9 +61,9 @@ function WorkGrid({ works, onPlay, t }) {
   );
 }
 
-const ADVANCE_MS = 4500;
+const ADVANCE_MS = 6000;
 
-// Horizontal reel that moves one work at a time on its own. It pauses while the
+// Slider that shows one large work at a time and moves to the next on its own. It pauses while the
 // pointer or keyboard focus is on it and while it is off screen, and stops for good
 // once someone scrolls it, uses the arrows or opens a video, so it stays where they left it.
 function WorkCarousel({ works, offset, total, onPlay, t }) {
